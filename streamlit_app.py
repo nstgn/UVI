@@ -42,7 +42,7 @@ from google.oauth2.credentials import Credentials
 
 #2 Input Data
 # Otentikasi Google
-auth.authenticate_user()
+#auth.authenticate_user()
 creds, _ = default()
 gc = gspread.authorize(creds)
 
