@@ -8,3 +8,4 @@ google
 gspread
 tensorflow-cpu==2.18
 statsmodels
+plotly
