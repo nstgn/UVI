@@ -35,7 +35,6 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 
 # Data spreadsheet
-from google.colab import drive
 import gspread
 from google.auth import default
 from google.auth.transport.requests import Request
