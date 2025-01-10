@@ -38,7 +38,6 @@ import plotly.express as px
 import gspread
 from google.auth import default
 from google.auth.transport.requests import Request
-from google.colab import auth
 from google.oauth2.credentials import Credentials
 
 #2 Input Data
