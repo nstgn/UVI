@@ -1,2 +1,10 @@
 streamlit
 st-gsheets-connection
+pandas
+numpy
+matplotlib
+scikit-learn
+google
+gspread
+tensorflow-cpu==2.18
+statsmodels
