@@ -48,7 +48,7 @@ gc = gspread.authorize(creds)
 
 # Buka Google Sheet
 sheet_url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?gid=0#gid=0"
-worksheet = gc.open_by_url(sheet_url).sheet1
+#worksheet = gc.open_by_url(sheet_url).sheet1
 
 # Baca data ke dalam dataframe
 data = pd.DataFrame(worksheet.get_all_records(expected_headers=[ "Time", "Intensity"]))
