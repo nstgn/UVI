@@ -51,7 +51,7 @@ sheet_url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5
 #worksheet = gc.open_by_url(sheet_url).sheet1
 
 # Baca data ke dalam dataframe
-data = pd.DataFrame(worksheet.get_all_records(expected_headers=[ "Time", "Intensity"]))
+#data = pd.DataFrame(worksheet.get_all_records(expected_headers=[ "Time", "Intensity"]))
 
 # Tampilkan data
 print(data)
