@@ -113,21 +113,27 @@ ax.set_ylabel('UV Index')
 ax.legend()
 st.pyplot(fig)
 
-# Future Predictions
 st.subheader("Future Predictions")
 future_steps = 10
 last_sequence = X_test[-1]
 future_predictions = []
+
+# Loop untuk prediksi masa depan
 for _ in range(future_steps):
     prediction = model.predict(last_sequence.reshape(1, n_steps, 1))[0, 0]
     future_predictions.append(prediction)
     last_sequence = np.append(last_sequence[1:], prediction)
 
+# Inversi normalisasi dan bulatkan ke integer
 future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
+future_predictions_rounded = np.round(future_predictions_scaled).astype(int)
+
 future_df = pd.DataFrame({
     'Step': range(1, future_steps + 1),
-    'Predicted Index': future_predictions_scaled.flatten()
+    'Predicted Index': future_predictions_rounded.flatten()
 })
 
+# Tampilkan hasil prediksi
 st.write(future_df)
 st.line_chart(future_df.set_index('Step')['Predicted Index'])
+
