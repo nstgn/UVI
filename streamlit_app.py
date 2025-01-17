@@ -113,52 +113,21 @@ ax.set_ylabel('UV Index')
 ax.legend()
 st.pyplot(fig)
 
-# Fungsi untuk prediksi masa depan
-def predict_future(model, scaler, X_test, n_steps, future_steps, time_interval, start_time):
-    last_sequence = X_test[-1]  # Ambil urutan terakhir dari data test
-    future_predictions = []
-    future_times = [start_time + i * time_interval for i in range(1, future_steps + 1)]
+# Future Predictions
+st.subheader("Future Predictions")
+future_steps = 10
+last_sequence = X_test[-1]
+future_predictions = []
+for _ in range(future_steps):
+    prediction = model.predict(last_sequence.reshape(1, n_steps, 1))[0, 0]
+    future_predictions.append(prediction)
+    last_sequence = np.append(last_sequence[1:], prediction)
 
-    # Loop untuk melakukan prediksi
-    for _ in range(future_steps):
-        prediction = model.predict(last_sequence.reshape(1, n_steps, 1))[0, 0]
-        future_predictions.append(prediction)
-        last_sequence = np.append(last_sequence[1:], prediction)  # Perbarui urutan
+future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
+future_df = pd.DataFrame({
+    'Step': range(1, future_steps + 1),
+    'Predicted Index': future_predictions_scaled.flatten()
+})
 
-    # Inversi normalisasi dan pembulatan ke integer
-    future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
-    future_df = pd.DataFrame({
-        'Time': future_times,
-        'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
-    })
-
-    return future_df
-
-# Streamlit Title
-st.title("UV Index Prediction with LSTM")
-
-# Konfigurasi Waktu Prediksi
-start_time = st.sidebar.time_input("Select Start Time", value=pd.Timestamp.now().replace(second=0, microsecond=0))
-future_steps = st.sidebar.slider("Number of Future Steps", min_value=1, max_value=20, value=10)
-time_interval = pd.Timedelta(minutes=30)
-
-# Prediksi Masa Depan
-if st.sidebar.button("Predict Future"):
-    # Asumsikan `model`, `scaler`, `X_test`, dan `n_steps` sudah didefinisikan sebelumnya
-    future_df = predict_future(model, scaler, X_test, n_steps, future_steps, time_interval, start_time)
-
-    # Tampilkan DataFrame hasil prediksi
-    st.subheader("Future Predictions")
-    st.dataframe(future_df)
-
-    # Visualisasi Prediksi Masa Depan
-    st.subheader("Future Prediction Visualization")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(future_df['Time'], future_df['Predicted Index'], marker='o', label='Future Predictions', color='purple')
-    ax.set_title('Future UV Index Predictions', fontsize=14)
-    ax.set_xlabel('Time', fontsize=12)
-    ax.set_ylabel('UV Index', fontsize=12)
-    ax.grid(True, linestyle='--', alpha=0.7)
-    ax.legend()
-    st.pyplot(fig)
-
+st.write(future_df)
+st.line_chart(future_df.set_index('Step')['Predicted Index'])
