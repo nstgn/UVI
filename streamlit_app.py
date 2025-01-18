@@ -20,7 +20,7 @@ data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
 #3 Pre-Processing Data
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
 data.set_index('Datetime', inplace=True)
-data = data[['Index']].copy()
+data = data[['Index']]
 data = data.resample('2T').mean()
 data['Index'].interpolate(method='linear', inplace=True)
 
@@ -140,8 +140,10 @@ for i, row in future_df.iterrows():
             unsafe_allow_html=True,
         )
 
-latest_data = data.iloc[-1]
+latest_data = data.iloc[-1]  # Ambil data terakhir
+latest_time = latest_data.name  # Nama indeks adalah waktu (Datetime)
+
 st.write("**Data terbaru:**")
-st.write(f"**Time:** {latest_data['Time']}")
+st.write(f"**Time:** {latest_time.strftime('%H:%M')}")  # Format waktu
 st.write(f"**Index:** {latest_data['Index']}")
-time.sleep(5)  # Refresh setiap 5 detik
+time.sleep(5)  # Tunggu 5 detik
