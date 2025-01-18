@@ -11,9 +11,6 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import matplotlib.pyplot as plt
 
-# Streamlit Title
-st.title("UV Index Prediction using LSTM")
-
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 
@@ -71,8 +68,6 @@ history=model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(
 train_predicted = model.predict(X_train)
 test_predicted = model.predict(X_test)
 
-# Atur waktu awal ke interval 30 menit terdekat
-st.subheader("Future Predictions")
 last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
@@ -103,7 +98,10 @@ future_df = pd.DataFrame({
 
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
-# Tampilkan prakiraan UV di Streamlit
+# Streamlit Title
+st.title("UV Index Prediction using LSTM")
+st.subheader("Future Predictions")# Tampilkan prakiraan UV di Streamlit
+st.title("UV Index Forecast")
 st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
 
 # Tampilan grid prakiraan
@@ -129,3 +127,15 @@ for i, row in future_df.iterrows():
         st.markdown(f"### {row['Time'].strftime('%H:%M')}")
         st.markdown(f"#### {icon} {uv_level}")
         st.markdown(desc)
+
+# Visualisasi
+st.write("---")
+st.subheader("Visualisasi UV Index Prediksi")
+plt.figure(figsize=(10, 6))
+plt.plot(future_df["Time"], future_df["Predicted Index"], marker="o", color="purple", label="Predicted UV Index")
+plt.title("Predicted UV Index")
+plt.xlabel("Time")
+plt.ylabel("UV Index")
+plt.grid(True, linestyle="--", alpha=0.7)
+plt.legend()
+st.pyplot(plt)
