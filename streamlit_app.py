@@ -71,26 +71,6 @@ history=model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(
 train_predicted = model.predict(X_train)
 test_predicted = model.predict(X_test)
 
-#11 Evaluasi Model
-#Evaluasi untuk data training
-mse_train = mean_squared_error(y_train,train_predicted)
-rmse_train = np.sqrt(mse_train)
-mae_train = mean_absolute_error(y_train, train_predicted)
-r2_train = r2_score(y_train,train_predicted)*100
-
-#Evaluasi untuk data testing
-mse_test = mean_squared_error(y_test, test_predicted)
-rmse_test =np.sqrt(mse_test)
-mae_test = mean_absolute_error(y_test, test_predicted)
-r2_test = r2_score(y_test, test_predicted)*100
-
-# Menampilkan hasil evaluasi
-st.subheader("Model Evaluation")
-st.write("### Training Metrics")
-st.write(f"MSE: {mse_train:.4f}, RMSE: {rmse_train:.4f}, MAE: {mae_train:.4f}, R²: {r2_train:.2f}%")
-st.write("### Testing Metrics")
-st.write(f"MSE: {mse_test:.4f}, RMSE: {rmse_test:.4f}, MAE: {mae_test:.4f}, R²: {r2_test:.2f}%")
-
 
 #13 Visualisasi Data
 st.subheader("Predictions vs Actual")
