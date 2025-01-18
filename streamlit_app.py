@@ -20,7 +20,7 @@ data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
 #3 Pre-Processing Data
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
 data.set_index('Datetime', inplace=True)
-data = data[['Index']].copy()
+data = data[['Time', 'Index']].copy()
 data = data.resample('2T').mean()
 data['Index'].interpolate(method='linear', inplace=True)
 
