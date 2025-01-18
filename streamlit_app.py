@@ -142,7 +142,7 @@ for i, row in future_df.iterrows():
         )
 
 latest_data = data.iloc[-1]
-        st.write("**Data terbaru:**")
-        st.write(f"**Time:** {latest_data['Time']}")
+st.write("**Data terbaru:**")
+st.write(f"**Time:** {latest_data['Time']}")
         st.write(f"**Index:** {latest_data['Index']}")
     time.sleep(5)  # Refresh setiap 5 detik
