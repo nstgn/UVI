@@ -10,10 +10,6 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import matplotlib.pyplot as plt
-from streamlit_autorefresh import st_autorefresh
-
-# Set Autorefresh Interval
-refresh_interval = st_autorefresh(interval=5000, limit=None, key="data_refresh")
 
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
