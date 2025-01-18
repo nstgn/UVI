@@ -71,25 +71,6 @@ history=model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(
 train_predicted = model.predict(X_train)
 test_predicted = model.predict(X_test)
 
-
-#13 Visualisasi Data
-st.subheader("Predictions vs Actual")
-train_actual = scaler.inverse_transform(y_train.reshape(-1, 1))
-train_predicted = scaler.inverse_transform(train_predicted)
-test_actual = scaler.inverse_transform(y_test.reshape(-1, 1))
-test_predicted = scaler.inverse_transform(test_predicted)
-
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.plot(range(len(train_actual)), train_actual, label='Actual Train', color='blue')
-ax.plot(range(len(train_actual), len(train_actual) + len(test_actual)), test_actual, label='Actual Test', color='green')
-ax.plot(range(len(train_predicted)), train_predicted, label='Predicted Train', color='red')
-ax.plot(range(len(train_predicted), len(train_predicted) + len(test_predicted)), test_predicted, label='Predicted Test', color='orange')
-ax.set_title('Predictions vs Actual')
-ax.set_xlabel('Time Steps')
-ax.set_ylabel('UV Index')
-ax.legend()
-st.pyplot(fig)
-
 # Atur waktu awal ke interval 30 menit terdekat
 st.subheader("Future Predictions")
 last_time = data.index[-1]
@@ -163,15 +144,3 @@ for i, row in future_df.iterrows():
             """,
             unsafe_allow_html=True,
         )
-
-# Visualisasi
-st.write("---")
-st.subheader("Visualisasi UV Index Prediksi")
-plt.figure(figsize=(10, 6))
-plt.plot(future_df["Time"], future_df["Predicted Index"], marker="o", color="purple", label="Predicted UV Index")
-plt.title("Predicted UV Index")
-plt.xlabel("Time")
-plt.ylabel("UV Index")
-plt.grid(True, linestyle="--", alpha=0.7)
-plt.legend()
-st.pyplot(plt)
