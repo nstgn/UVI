@@ -112,23 +112,26 @@ for i, row in future_df.iterrows():
         if uv_level < 3:
             icon = "🟢"
             desc = "Low"
+            bg_color = "#00ff00"
         elif uv_level < 6:
             icon = "🟡"
             desc = "Moderate"
+            bg_color = "#ffcc00"
         elif uv_level < 8:
             icon = "🟠"
             desc = "High"
+            bg_color = "#ff6600"
         elif uv_level < 11:
             icon = "🔴"
             desc = "Very High"
+            bg_color = "#ff0000"
         else:
             icon = "🟣"
             desc = "Extreme"
-        st.markdown(f"### {row['Time'].strftime('%H:%M')}")
-        st.markdown(f"#### {icon} {uv_level}")
-        st.markdown(desc)
-
-st.markdown(
+            bg_color = "#9900cc"
+        
+        # Kustomisasi tampilan grid
+        st.markdown(
             f"""
             <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
                 <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
@@ -138,3 +141,11 @@ st.markdown(
             """,
             unsafe_allow_html=True,
         )
+
+latest_data = data.iloc[-1]
+        st.write("**Data terbaru:**")
+        st.write(f"**Date:** {latest_data['Date']}")
+        st.write(f"**Time:** {latest_data['Time']}")
+        st.write(f"**Intensity:** {latest_data['Intensity']}")
+        st.write(f"**Index:** {latest_data['Index']}")
+    time.sleep(5)  # Refresh setiap 5 detik
