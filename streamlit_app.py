@@ -5,21 +5,25 @@ import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import matplotlib.pyplot as plt
-from streamlit_gsheets import GSheetsConnection
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 # Streamlit Title
 st.title("UV Index Prediction using LSTM")
 
-# Streamlit GSheets Connection
+# Google Sheets Connection
 st.subheader("Load Data from Google Sheets")
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
-conn = st.connection("gsheets", type=GSheetsConnection)
-data = conn.read(spreadsheet=url)
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+creds = ServiceAccountCredentials.from_json_keyfile_name(
+    r"E:\A) SEMESTER 9\Code TA\.streamlit\uv-gsheets-439900-f7eafe9b374b.json", scope
+)
+client = gspread.authorize(creds)
+sheet = client.open_by_url(url).sheet1
+data = pd.DataFrame(sheet.get_all_records())
 st.dataframe(data)
 
-# Processing Data
+# Preprocessing Data
 st.subheader("Preprocessing Data")
 # Convert Date and Time to Datetime
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
@@ -131,43 +135,3 @@ future_df = pd.DataFrame({
 
 st.write(future_df)
 st.line_chart(future_df.set_index('Step')['Predicted Index'])
-
-# Tampilkan prakiraan UV di Streamlit
-st.title("UV Index Forecast")
-st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
-
-# Tampilan grid prakiraan
-cols = st.columns(len(future_df))
-for i, row in future_df.iterrows():
-    with cols[i]:
-        uv_level = row["Predicted Index"]
-        if uv_level < 3:
-            icon = "🟢"
-            desc = "Low"
-        elif uv_level < 6:
-            icon = "🟡"
-            desc = "Moderate"
-        elif uv_level < 8:
-            icon = "🟠"
-            desc = "High"
-        elif uv_level < 11:
-            icon = "🔴"
-            desc = "Very High"
-        else:
-            icon = "🟣"
-            desc = "Extreme"
-        st.markdown(f"### {row['Time'].strftime('%H:%M')}")
-        st.markdown(f"#### {icon} {uv_level}")
-        st.markdown(desc)
-
-# Visualisasi
-st.write("---")
-st.subheader("Visualisasi UV Index Prediksi")
-plt.figure(figsize=(10, 6))
-plt.plot(future_df["Time"], future_df["Predicted Index"], marker="o", color="purple", label="Predicted UV Index")
-plt.title("Predicted UV Index")
-plt.xlabel("Time")
-plt.ylabel("UV Index")
-plt.grid(True, linestyle="--", alpha=0.7)
-plt.legend()
-st.pyplot(plt)
