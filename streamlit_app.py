@@ -128,14 +128,13 @@ for i, row in future_df.iterrows():
         st.markdown(f"#### {icon} {uv_level}")
         st.markdown(desc)
 
-# Visualisasi
-st.write("---")
-st.subheader("Visualisasi UV Index Prediksi")
-plt.figure(figsize=(10, 6))
-plt.plot(future_df["Time"], future_df["Predicted Index"], marker="o", color="purple", label="Predicted UV Index")
-plt.title("Predicted UV Index")
-plt.xlabel("Time")
-plt.ylabel("UV Index")
-plt.grid(True, linestyle="--", alpha=0.7)
-plt.legend()
-st.pyplot(plt)
+st.markdown(
+            f"""
+            <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
+                <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
+                <h2 style="color:white;">{icon} {uv_level}</h2>
+                <p style="color:white;">{desc}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
