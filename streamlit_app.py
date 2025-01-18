@@ -142,6 +142,42 @@ future_df = pd.DataFrame({
 
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
-# Tampilkan hasil prediksi
-st.write(future_df)
-st.line_chart(future_df.set_index('Time')['Predicted Index'])
+# Tampilkan prakiraan UV di Streamlit
+st.title("UV Index Forecast")
+st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
+
+# Tampilan grid prakiraan
+cols = st.columns(len(future_df))
+for i, row in future_df.iterrows():
+    with cols[i]:
+        uv_level = row["Predicted Index"]
+        if uv_level < 3:
+            icon = "🟢"
+            desc = "Low"
+        elif uv_level < 6:
+            icon = "🟡"
+            desc = "Moderate"
+        elif uv_level < 8:
+            icon = "🟠"
+            desc = "High"
+        elif uv_level < 11:
+            icon = "🔴"
+            desc = "Very High"
+        else:
+            icon = "🟣"
+            desc = "Extreme"
+        st.markdown(f"### {row['Time'].strftime('%H:%M')}")
+        st.markdown(f"#### {icon} {uv_level}")
+        st.markdown(desc)
+
+# Visualisasi
+st.write("---")
+st.subheader("Visualisasi UV Index Prediksi")
+plt.figure(figsize=(10, 6))
+plt.plot(future_df["Time"], future_df["Predicted Index"], marker="o", color="purple", label="Predicted UV Index")
+plt.title("Predicted UV Index")
+plt.xlabel("Time")
+plt.ylabel("UV Index")
+plt.grid(True, linestyle="--", alpha=0.7)
+plt.legend()
+st.pyplot(plt)
