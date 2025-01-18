@@ -1,6 +1,6 @@
-streamlit
+#streamlit
 st-gsheets-connection
-pandas
+#pandas
 numpy
 matplotlib
 scikit-learn
@@ -8,4 +8,7 @@ google-api-python-client
 gspread
 oauth2client
 tensorflow-cpu==2.18
-plotly
+#plotly
+streamlit==1.25.0    # Versi terbaru (pastikan untuk memeriksa versi Anda)
+plotly==5.17.0       # Library untuk visualisasi
+pandas==2.1.1        # Library manipulasi data
