@@ -94,7 +94,7 @@ future_df = pd.DataFrame({
     'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
 })
 
-future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
+future_df = future_df[(future_df['Time'].dt.hour >= 5) & (future_df['Time'].dt.hour <= 18)]
 
 # Streamlit Title
 st.title("UV Index")
