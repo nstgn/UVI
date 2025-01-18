@@ -9,7 +9,7 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
@@ -140,9 +140,29 @@ for i, row in future_df.iterrows():
             unsafe_allow_html=True,
         )
 
-latest_data = data.iloc[-1]  # Ambil data terakhir
-latest_time = latest_data.name  # Nama indeks adalah waktu (Datetime)
+# Mendapatkan data terbaru
+latest_data = data.iloc[-1]  # Data terbaru
+latest_time = latest_data.name  # Waktu dari indeks
+uv_index = latest_data['Index']  # Nilai Index
 
-st.write("**Data terbaru:**")
-st.write(f"**Time:** {latest_time.strftime('%H:%M')}")  # Format waktu
-st.write(f"**Index:** {latest_data['Index']}")
+# Membuat gauge chart
+fig = go.Figure(go.Indicator(
+    mode="gauge+number",
+    value=uv_index,
+    title={'text': "UV Level"},
+    gauge={
+        'axis': {'range': [0, 10]},
+        'bar': {'color': "orange"},
+        'steps': [
+            {'range': [0, 3], 'color': "green"},
+            {'range': [3, 6], 'color': "yellow"},
+            {'range': [6, 8], 'color': "orange"},
+            {'range': [8, 10], 'color': "red"},
+        ]
+    }
+))
+
+# Menampilkan widget
+st.write("### Data Terbaru:")
+st.plotly_chart(fig, use_container_width=True)
+st.write(f"**Time:** {latest_time.strftime('%Y-%m-%d %H:%M:%S')}"
