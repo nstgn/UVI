@@ -14,9 +14,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 # 2. Konfigurasi Google Sheets API
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    r"E:\A) SEMESTER 9\Code TA\.streamlit\uv-gsheets-439900-f7eafe9b374b.json", scope
-)
+creds = ServiceAccountCredentials.from_json_keyfile_name(r"E:\A) SEMESTER 9\Code TA\.streamlit\uv-gsheets-439900-f7eafe9b374b.json", scope)
 client = gspread.authorize(creds)
 sheet_url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit"
 worksheet = client.open_by_url(sheet_url).sheet1
