@@ -10,6 +10,10 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import matplotlib.pyplot as plt
+from streamlit_autorefresh import st_autorefresh
+
+# Set Autorefresh Interval
+refresh_interval = st_autorefresh(interval=5000, limit=None, key="data_refresh")
 
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
@@ -146,4 +150,3 @@ latest_time = latest_data.name  # Nama indeks adalah waktu (Datetime)
 st.write("**Data terbaru:**")
 st.write(f"**Time:** {latest_time.strftime('%H:%M')}")  # Format waktu
 st.write(f"**Index:** {latest_data['Index']}")
-time.sleep(5)  # Tunggu 5 detik
