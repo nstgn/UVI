@@ -1,146 +1,114 @@
-#1 Import Library
-import numpy as np
-import pandas as pd
-import tensorflow as tf
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import requests
 import streamlit as st
-from streamlit_gsheets import GSheetsConnection
-import matplotlib.pyplot as plt
+from streamlit_lottie import st_lottie
+from PIL import Image
 
-# Streamlit Title
-st.title("UV Index Prediction using LSTM")
 
-url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
-conn = st.connection("gsheets", type=GSheetsConnection)
+# Find more emojis here: https://www.webfx.com/tools/emoji-cheat-sheet/
+st.set_page_config(page_title="My Webpage", page_icon=":tada:", layout="wide")
 
-#data = conn.read(worksheet="Sheet1")
-data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
 
-#3 Pre-Processing Data
-data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
-data.set_index('Datetime', inplace=True)
-data = data[['Index']].copy()
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
 
-# Resampling data setiap 2 menit, interpolasi nilai yang hilang
-data = data.resample('2T').mean()
-data['Index'].interpolate(method='linear', inplace=True)
 
-#4 Normalisasi Data
-scaler = MinMaxScaler(feature_range=(0, 1))
-data ['Index_scaled'] = scaler.fit_transform(data[['Index']])
+# Use local CSS
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-#5 Inisialisasi Timestep
-def prepare_data(series, n_steps):
-    X, y = [], []
-    for i in range(len(series)-n_steps):
-        X.append(series[i:i+n_steps])
-        y.append(series[i+n_steps])
-    return np.array(X), np.array(y)
 
-n_steps = 7
-X, y = prepare_data(data['Index_scaled'].values, n_steps)
+local_css("style/style.css")
 
-#6 Split Data
-split = int(len(X) * 0.8)
-X_train, X_test = X[:split], X[split:]
-y_train, y_test = y[:split], y[split:]
+# ---- LOAD ASSETS ----
+lottie_coding = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_fcfjwiyb.json")
+img_contact_form = Image.open("images/yt_contact_form.png")
+img_lottie_animation = Image.open("images/yt_lottie_animation.png")
 
-# Reshape input [samples, time steps, features]
-X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 1))
-X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 1))
+# ---- HEADER SECTION ----
+with st.container():
+    st.subheader("Hi, I am Sven :wave:")
+    st.title("A Data Analyst From Germany")
+    st.write(
+        "I am passionate about finding ways to use Python and VBA to be more efficient and effective in business settings."
+    )
+    st.write("[Learn More >](https://pythonandvba.com)")
 
-#7 Bangun LSTM
-model = Sequential([
-    LSTM(50, activation='relu', input_shape=(n_steps, 1), return_sequences=True),
-    Dropout(0.2),
-    LSTM(50, activation='relu'),
-    Dense(1)
-])
+# ---- WHAT I DO ----
+with st.container():
+    st.write("---")
+    left_column, right_column = st.columns(2)
+    with left_column:
+        st.header("What I do")
+        st.write("##")
+        st.write(
+            """
+            On my YouTube channel I am creating tutorials for people who:
+            - are looking for a way to leverage the power of Python in their day-to-day work.
+            - are struggling with repetitive tasks in Excel and are looking for a way to use Python and VBA.
+            - want to learn Data Analysis & Data Science to perform meaningful and impactful analyses.
+            - are working with Excel and found themselves thinking - "there has to be a better way."
 
-#8 Pembuatan Model dan Kompilasi Model
-model.compile(optimizer='adam', loss='mean_squared_error')
-
-#9 Pelatihan Model
-history=model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(X_test, y_test), verbose=1)
-
-#10 Prediksi Model
-train_predicted = model.predict(X_train)
-test_predicted = model.predict(X_test)
-
-# Atur waktu awal ke interval 30 menit terdekat
-st.subheader("Future Predictions")
-last_time = data.index[-1]
-last_time = last_time.replace(second=0, microsecond=0)
-minute_offset = last_time.minute % 30
-if minute_offset != 0:
-    last_time += pd.Timedelta(minutes=(30 - minute_offset))  # Bulatkan ke atas
-
-# Interval waktu 30 menit
-time_interval = pd.Timedelta(minutes=30)
-
-# Prediksi ke depan
-future_steps = 10
-last_sequence = X_test[-1]  # Ambil urutan terakhir dari data test
-future_predictions = []
-future_times = [last_time + i * time_interval for i in range(1, future_steps + 1)]
-
-# Loop untuk prediksi
-for _ in range(future_steps):
-    prediction = model.predict(last_sequence.reshape(1, n_steps, 1))[0, 0]
-    future_predictions.append(prediction)
-    last_sequence = np.append(last_sequence[1:], prediction)
-
-# Inversi normalisasi dan bulatkan prediksi
-future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
-future_df = pd.DataFrame({
-    'Time': future_times,
-    'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
-})
-
-future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
-
-# Tampilkan prakiraan UV di Streamlit
-st.title("UV Index Forecast")
-st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
-
-# Tampilan grid prakiraan
-cols = st.columns(len(future_df))
-for i, row in future_df.iterrows():
-    with cols[i]:
-        uv_level = row["Predicted Index"]
-        if uv_level < 3:
-            icon = "🟢"
-            desc = "Low"
-            bg_color = "#00ff00"
-        elif uv_level < 6:
-            icon = "🟡"
-            desc = "Moderate"
-            bg_color = "#ffcc00"
-        elif uv_level < 8:
-            icon = "🟠"
-            desc = "High"
-            bg_color = "#ff6600"
-        elif uv_level < 11:
-            icon = "🔴"
-            desc = "Very High"
-            bg_color = "#ff0000"
-        else:
-            icon = "🟣"
-            desc = "Extreme"
-            bg_color = "#9900cc"
-        
-        # Kustomisasi tampilan grid
-        st.markdown(
-            f"""
-            <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
-                <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
-                <h2 style="color:white;">{icon} {uv_level}</h2>
-                <p style="color:white;">{desc}</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
+            If this sounds interesting to you, consider subscribing and turning on the notifications, so you don’t miss any content.
+            """
         )
+        st.write("[YouTube Channel >](https://youtube.com/c/CodingIsFun)")
+    with right_column:
+        st_lottie(lottie_coding, height=300, key="coding")
+
+# ---- PROJECTS ----
+with st.container():
+    st.write("---")
+    st.header("My Projects")
+    st.write("##")
+    image_column, text_column = st.columns((1, 2))
+    with image_column:
+        st.image(img_lottie_animation)
+    with text_column:
+        st.subheader("Integrate Lottie Animations Inside Your Streamlit App")
+        st.write(
+            """
+            Learn how to use Lottie Files in Streamlit!
+            Animations make our web app more engaging and fun, and Lottie Files are the easiest way to do it!
+            In this tutorial, I'll show you exactly how to do it
+            """
+        )
+        st.markdown("[Watch Video...](https://youtu.be/TXSOitGoINE)")
+with st.container():
+    image_column, text_column = st.columns((1, 2))
+    with image_column:
+        st.image(img_contact_form)
+    with text_column:
+        st.subheader("How To Add A Contact Form To Your Streamlit App")
+        st.write(
+            """
+            Want to add a contact form to your Streamlit website?
+            In this video, I'm going to show you how to implement a contact form in your Streamlit app using the free service ‘Form Submit’.
+            """
+        )
+        st.markdown("[Watch Video...](https://youtu.be/FOULV9Xij_8)")
+
+# ---- CONTACT ----
+with st.container():
+    st.write("---")
+    st.header("Get In Touch With Me!")
+    st.write("##")
+
+    # Documention: https://formsubmit.co/ !!! CHANGE EMAIL ADDRESS !!!
+    contact_form = """
+    <form action="https://formsubmit.co/YOUR@MAIL.COM" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Your message here" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+    """
+    left_column, right_column = st.columns(2)
+    with left_column:
+        st.markdown(contact_form, unsafe_allow_html=True)
+    with right_column:
+        st.empty()
