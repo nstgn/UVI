@@ -132,10 +132,6 @@ future_df = pd.DataFrame({
 st.write(future_df)
 st.line_chart(future_df.set_index('Step')['Predicted Index'])
 
-
-# Filter waktu (06:00 - 18:00 saja)
-future_df = future_df[(future_df["Time"].dt.hour >= 6) & (future_df["Time"].dt.hour <= 18)]
-
 # Tampilkan prakiraan UV di Streamlit
 st.title("UV Index Forecast")
 st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
