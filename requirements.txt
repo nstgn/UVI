@@ -8,4 +8,6 @@ google-api-python-client
 gspread
 oauth2client
 tensorflow-cpu==2.18
-seaborn
+streamlit-autorefresh
+
+
