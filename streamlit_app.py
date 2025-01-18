@@ -95,57 +95,39 @@ st.write(f"MSE: {mse_train:.4f}, RMSE: {rmse_train:.4f}, MAE: {mae_train:.4f}, R
 st.write("### Testing Metrics")
 st.write(f"MSE: {mse_test:.4f}, RMSE: {rmse_test:.4f}, MAE: {mae_test:.4f}, R²: {r2_test:.2f}%")
 
-# Fungsi untuk melakukan prediksi masa depan
-def predict_future(model, scaler, X_test, n_steps, future_steps, time_interval, start_time):
-    last_sequence = X_test[-1]  # Ambil urutan terakhir dari data test
-    future_predictions = []
-    future_times = [start_time + i * time_interval for i in range(1, future_steps + 1)]
+# Visualize Predictions
+st.subheader("Predictions vs Actual")
+train_actual = scaler.inverse_transform(y_train.reshape(-1, 1))
+train_predicted = scaler.inverse_transform(train_predicted)
+test_actual = scaler.inverse_transform(y_test.reshape(-1, 1))
+test_predicted = scaler.inverse_transform(test_predicted)
 
-    # Loop untuk prediksi
-    for _ in range(future_steps):
-        prediction = model.predict(last_sequence.reshape(1, n_steps, 1))[0, 0]
-        future_predictions.append(prediction)
-        last_sequence = np.append(last_sequence[1:], prediction)  # Perbarui urutan
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(range(len(train_actual)), train_actual, label='Actual Train', color='blue')
+ax.plot(range(len(train_actual), len(train_actual) + len(test_actual)), test_actual, label='Actual Test', color='green')
+ax.plot(range(len(train_predicted)), train_predicted, label='Predicted Train', color='red')
+ax.plot(range(len(train_predicted), len(train_predicted) + len(test_predicted)), test_predicted, label='Predicted Test', color='orange')
+ax.set_title('Predictions vs Actual')
+ax.set_xlabel('Time Steps')
+ax.set_ylabel('UV Index')
+ax.legend()
+st.pyplot(fig)
 
-    # Inversi normalisasi dan pembulatan ke integer
-    future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
-    future_df = pd.DataFrame({
-        'Time': future_times,
-        'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
-    })
+# Future Predictions
+st.subheader("Future Predictions")
+future_steps = 10
+last_sequence = X_test[-1]
+future_predictions = []
+for _ in range(future_steps):
+    prediction = model.predict(last_sequence.reshape(1, n_steps, 1))[0, 0]
+    future_predictions.append(prediction)
+    last_sequence = np.append(last_sequence[1:], prediction)
 
-    # Filter prediksi hanya untuk jam antara 06:00 dan 18:00
-    future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
-    return future_df
+future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
+future_df = pd.DataFrame({
+    'Step': range(1, future_steps + 1),
+    'Predicted Index': future_predictions_scaled.flatten()
+})
 
-# Streamlit Title
-st.title("Future UV Index Prediction")
-
-# Sidebar untuk konfigurasi prediksi
-start_time = st.sidebar.time_input("Start Time", value=pd.Timestamp.now().replace(second=0, microsecond=0))
-future_steps = st.sidebar.slider("Number of Future Steps", min_value=1, max_value=20, value=10)
-time_interval = pd.Timedelta(minutes=30)
-
-# Prediksi masa depan jika tombol ditekan
-if st.sidebar.button("Predict Future"):
-    # Pastikan model, scaler, X_test, dan n_steps sudah didefinisikan sebelumnya
-    future_df = predict_future(model, scaler, X_test, n_steps, future_steps, time_interval, start_time)
-
-    # Tampilkan DataFrame hasil prediksi
-    st.subheader("Future Predictions")
-    st.dataframe(future_df)
-
-    # Visualisasi prediksi
-    st.subheader("Prediction Visualization")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(future_df['Time'], future_df['Predicted Index'], marker='o', label='Future Predictions', color='purple')
-    ax.set_title('Future UV Index Predictions', fontsize=14)
-    ax.set_xlabel('Time', fontsize=12)
-    ax.set_ylabel('UV Index', fontsize=12)
-    ax.grid(True, linestyle='--', alpha=0.7)
-    ax.legend()
-
-    # Format sumbu waktu
-    ax.set_xticks(future_df['Time'])
-    ax.set_xticklabels(future_df['Time'].dt.strftime('%H:%M'), rotation=45)
-    st.pyplot(fig)
+st.write(future_df)
+st.line_chart(future_df.set_index('Step')['Predicted Index'])
