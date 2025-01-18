@@ -21,7 +21,6 @@ data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
 data.set_index('Datetime', inplace=True)
 data = data[['Index']].copy()
-data['Time'] = data.index.time
 data = data.resample('2T').mean()
 data['Index'].interpolate(method='linear', inplace=True)
 
