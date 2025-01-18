@@ -94,8 +94,30 @@ future_df = pd.DataFrame({
     'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
 })
 
-future_df = future_df[(future_df['Time'].dt.hour >= 5) & (future_df['Time'].dt.hour <= 18)]
+future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
+# Custom Header
+st.markdown(
+    """
+    <style>
+    .header {
+        background-color: #D6D6F5;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+    }
+    .header img {
+        width: 60px;
+    }
+    </style>
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Undip.png" alt="Logo">
+        <h2>Real-Time Sensor Data</h2>
+        <p>(THE DISPLAYED DATA IS REAL-TIME)</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 # Streamlit Title
 st.title("UV Index")
 latest_data = data.iloc[-1]  # Data terbaru
@@ -162,5 +184,28 @@ for i, row in future_df.iterrows():
             """,
             unsafe_allow_html=True,
         )
-
+# Custom Footer
+st.markdown(
+    """
+    <style>
+    .footer {
+        background-color: #D6D6F5;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .footer img {
+        width: 60px;
+    }
+    </style>
+    <div class="footer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Undip.png" alt="Logo">
+        <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+        <p>Nastangini<br>20440102130112</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
