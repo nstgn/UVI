@@ -115,8 +115,7 @@ st.markdown(
         <img src="data:image/png;base64,{logo}" alt="Logo" />
         <h3>Diponegoro University</h3>
     </div>
-    """.format(logo=open("E:\A) SEMESTER 9\logo undip.jpg", "rb").read().encode("base64").decode()), 
-    unsafe_allow_html=True
+    """.format(logo_path = r"E:\A) SEMESTER 9\logo undip.jpg", "rb").read().encode("base64").decode()),    unsafe_allow_html=True
 )
 
 
