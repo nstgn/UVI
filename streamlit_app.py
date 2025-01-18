@@ -165,4 +165,4 @@ fig = go.Figure(go.Indicator(
 # Menampilkan widget
 st.write("### Data Terbaru:")
 st.plotly_chart(fig, use_container_width=True)
-st.write(f"**Time:** {latest_time.strftime('%Y-%m-%d %H:%M:%S')}"
+st.write(f"**Time:** {latest_time.strftime('%H:%M')}"
