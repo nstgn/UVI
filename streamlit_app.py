@@ -15,7 +15,7 @@ st.title("UV Index Prediction using LSTM")
 st.subheader("Load Data from Google Sheets")
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name(r"E:\A) SEMESTER 9\Code TA\.streamlit\uv-gsheets-439900-f7eafe9b374b.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(".streamlit/uv-gsheets-439900-f7eafe9b374b.json", scope)
 client = gspread.authorize(creds)
 sheet = client.open_by_url(url).sheet1
 data = pd.DataFrame(sheet.get_all_records())
