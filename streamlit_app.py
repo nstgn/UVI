@@ -14,6 +14,9 @@ import matplotlib.pyplot as plt
 # Streamlit Title
 st.title("UV Index Prediction using LSTM")
 
+# Pilih halaman menggunakan radio button
+page = st.radio("Pilih Halaman", ["Prediksi vs Aktual", "Prakiraan UV Index", "Visualisasi"])
+
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 
@@ -79,6 +82,8 @@ train_predicted = scaler.inverse_transform(train_predicted)
 test_actual = scaler.inverse_transform(y_test.reshape(-1, 1))
 test_predicted = scaler.inverse_transform(test_predicted)
 
+if page == "Prediksi vs Aktual":
+    st.subheader("Predictions vs Actual")
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(range(len(train_actual)), train_actual, label='Actual Train', color='blue')
 ax.plot(range(len(train_actual), len(train_actual) + len(test_actual)), test_actual, label='Actual Test', color='green')
@@ -126,6 +131,13 @@ future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.h
 st.title("UV Index Forecast")
 st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
 
+elif page == "Prakiraan UV Index":
+    st.title("UV Index Forecast")
+    st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
+
+    # Tampilkan prakiraan UV
+    for i, row in future_df.iterrows():
+        st.write(f"{row['Time'].strftime('%H:%M')} - Predicted UV Index: {row['Predicted Index']}")
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
@@ -151,6 +163,7 @@ for i, row in future_df.iterrows():
         st.markdown(desc)
 
 # Visualisasi
+elif page == "Visualisasi":
 st.write("---")
 st.subheader("Visualisasi UV Index Prediksi")
 plt.figure(figsize=(10, 6))
