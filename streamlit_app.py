@@ -11,13 +11,14 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import matplotlib.pyplot as plt
 
+# Streamlit Title
+st.title("UV Index Prediction using LSTM")
 
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 #data = conn.read(worksheet="Sheet1")
 data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
-st.dataframe(data)
 
 #3 Pre-Processing Data
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
@@ -52,16 +53,6 @@ y_train, y_test = y[:split], y[split:]
 X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 1))
 X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 1))
 
-
-# Visualisasi Data Train dan Test
-
-plt.plot(range(len(y_train)), y_train, label='Data Train', color='purple')
-plt.plot(range(len(y_train), len(y_train) + len(y_test)), y_test, label='Data Test', color='green')
-plt.title("Data Train dan Data Test")
-plt.xlabel("Index") #karna default untuk urutan aja, jadi ya ga perlu pake
-plt.ylabel("Scaled Intensity")
-plt.legend()
-
 #7 Bangun LSTM
 model = Sequential([
     LSTM(50, activation='relu', input_shape=(n_steps, 1), return_sequences=True),
@@ -94,32 +85,33 @@ mae_test = mean_absolute_error(y_test, test_predicted)
 r2_test = r2_score(y_test, test_predicted)*100
 
 # Menampilkan hasil evaluasi
-print("Training Metrics:")
-print(f"MSE: {mse_train:.4f}, RMSE: {rmse_train:.4f}, MAE: {mae_train:.4f}, R²: {r2_train:.2f}%")
-print("\nTesting Metrics:")
-print(f"MSE: {mse_test:.4f}, RMSE: {rmse_test:.4f}, MAE: {mae_test:.4f}, R²: {r2_test:.2f}%")
+st.subheader("Model Evaluation")
+st.write("### Training Metrics")
+st.write(f"MSE: {mse_train:.4f}, RMSE: {rmse_train:.4f}, MAE: {mae_train:.4f}, R²: {r2_train:.2f}%")
+st.write("### Testing Metrics")
+st.write(f"MSE: {mse_test:.4f}, RMSE: {rmse_test:.4f}, MAE: {mae_test:.4f}, R²: {r2_test:.2f}%")
 
 
 #13 Visualisasi Data
-import seaborn as sns
-sns.set_style("darkgrid")
+st.subheader("Predictions vs Actual")
 train_actual = scaler.inverse_transform(y_train.reshape(-1, 1))
 train_predicted = scaler.inverse_transform(train_predicted)
 test_actual = scaler.inverse_transform(y_test.reshape(-1, 1))
 test_predicted = scaler.inverse_transform(test_predicted)
 
-plt.figure(figsize=(5, 3))
-plt.plot(range(len(train_actual)), train_actual, label='Actual Train', color='blue')
-plt.plot(range(len(train_actual), len(train_actual) + len(test_actual)), test_actual, label='Actual Test', color='green')
-plt.plot(range(len(train_predicted)), train_predicted, label='Predicted Train', color='red')
-plt.plot(range(len(train_predicted), len(train_predicted) + len(test_predicted)), test_predicted, label='Predicted Test', color='orange')
-plt.title('Prediksi vs Aktual (Latih dan Uji)')
-plt.xlabel('Time')
-plt.ylabel('Intensity')
-plt.legend()
-plt.show()
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(range(len(train_actual)), train_actual, label='Actual Train', color='blue')
+ax.plot(range(len(train_actual), len(train_actual) + len(test_actual)), test_actual, label='Actual Test', color='green')
+ax.plot(range(len(train_predicted)), train_predicted, label='Predicted Train', color='red')
+ax.plot(range(len(train_predicted), len(train_predicted) + len(test_predicted)), test_predicted, label='Predicted Test', color='orange')
+ax.set_title('Predictions vs Actual')
+ax.set_xlabel('Time Steps')
+ax.set_ylabel('UV Index')
+ax.legend()
+st.pyplot(fig)
 
 # Atur waktu awal ke interval 30 menit terdekat
+st.subheader("Future Predictions")
 last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
@@ -151,22 +143,5 @@ future_df = pd.DataFrame({
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
 # Tampilkan hasil prediksi
-print(future_df)
-
-# Visualisasi prediksi ke depan
-plt.figure(figsize=(10, 6))
-plt.plot(future_df['Time'], future_df['Predicted Index'], marker='o', label='Future Predictions', color='purple')
-plt.title('Future UV Index Predictions', fontsize=14)
-plt.xlabel('Time', fontsize=12)
-plt.ylabel('UV Index', fontsize=12)
-
-# Atur tampilan waktu pada sumbu X agar lebih rapi
-plt.xticks(future_df['Time'], labels=future_df['Time'].dt.strftime('%H:%M'), rotation=45)
-plt.grid(True, linestyle='--', alpha=0.7)
-
-# Atur sumbu Y agar hanya menampilkan angka bulat
-y_min = int(future_df['Predicted Index'].min())
-y_max = int(future_df['Predicted Index'].max())
-plt.yticks(np.arange(y_min, y_max + 1, step=1))
-plt.legend()
-plt.show()
+st.write(future_df)
+st.line_chart(future_df.set_index('Time')['Predicted Index'])
