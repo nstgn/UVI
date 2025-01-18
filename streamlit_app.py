@@ -98,9 +98,8 @@ future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.h
 
 # Streamlit Title
 # Menambahkan Header
-st.markdown
-(
-    """
+st.markdown(
+    f"""
     <style>
         .header, .footer {
             background-color: #f3f4f6;
