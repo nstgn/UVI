@@ -98,27 +98,40 @@ future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.h
 
 # Streamlit Title
 # Menambahkan Header
+import streamlit as st
+import base64
+
+# Fungsi untuk mengubah gambar menjadi Base64
+def get_image_as_base64(path):
+    with open(path, "rb") as file:
+        return base64.b64encode(file.read()).decode("utf-8")
+
+# Path ke logo
+logo_path = r"E:\A) SEMESTER 9\logo undip.jpg"
+logo_base64 = get_image_as_base64(logo_path)
+
+# Menambahkan Header dengan Border dan Gambar
 st.markdown(
     f"""
     <style>
-        .header, .footer {
+        .header {{
             background-color: #f3f4f6;
             padding: 10px;
             text-align: center;
             border: 1px solid #ddd;
-        }
-        .header img, .footer img {
+            border-radius: 5px;
+        }}
+        .header img {{
             height: 50px;
-        }
+        }}
     </style>
     <div class="header">
-        <img src="data:image/png;base64,{logo}" alt="Logo" />
+        <img src="data:image/png;base64,{logo_base64}" alt="Logo" />
         <h3>Diponegoro University</h3>
     </div>
-    """.format(logo_path = r"E:\A) SEMESTER 9\logo undip.jpg", "rb").read().encode("base64").decode()),
-unsafe_allow_html=True
+    """,
+    unsafe_allow_html=True
 )
-
 
 st.title("UV Index")
 latest_data = data.iloc[-1]  # Data terbaru
