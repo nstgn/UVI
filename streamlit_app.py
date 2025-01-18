@@ -97,11 +97,34 @@ future_df = pd.DataFrame({
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
 # Streamlit Title
-st.title("UV Index Prediction using LSTM")
-st.subheader("Future Predictions")# Tampilkan prakiraan UV di Streamlit
-st.title("UV Index Forecast")
-st.write("Prakiraan UV Index untuk 5 Jam ke Depan")
+st.title("UV Index")
+latest_data = data.iloc[-1]  # Data terbaru
+latest_time = latest_data.name  # Waktu dari indeks
+uv_index = latest_data['Index']  # Nilai Index
 
+# Membuat gauge chart
+fig = go.Figure(go.Indicator(
+    mode="gauge+number",
+    value=uv_index,
+    title={'text': "UV Level"},
+    gauge={
+        'axis': {'range': [0, 11]},
+        'bar': {'color': "orange"},
+        'steps': [
+            {'range': [0, 3], 'color': "green"},
+            {'range': [3, 6], 'color': "yellow"},
+            {'range': [6, 8], 'color': "orange"},
+            {'range': [8, 10], 'color': "red"},
+            {'range': [10,11], 'color': "purple"},
+        ]
+    }
+))
+
+# Menampilkan widget
+st.plotly_chart(fig, use_container_width=True)
+st.write(f"**Time:** {latest_time.strftime('%H:%M')}")
+
+st.title("UV Index Prediction")
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
@@ -140,29 +163,4 @@ for i, row in future_df.iterrows():
             unsafe_allow_html=True,
         )
 
-# Mendapatkan data terbaru
-latest_data = data.iloc[-1]  # Data terbaru
-latest_time = latest_data.name  # Waktu dari indeks
-uv_index = latest_data['Index']  # Nilai Index
 
-# Membuat gauge chart
-fig = go.Figure(go.Indicator(
-    mode="gauge+number",
-    value=uv_index,
-    title={'text': "UV Level"},
-    gauge={
-        'axis': {'range': [0, 10]},
-        'bar': {'color': "orange"},
-        'steps': [
-            {'range': [0, 3], 'color': "green"},
-            {'range': [3, 6], 'color': "yellow"},
-            {'range': [6, 8], 'color': "orange"},
-            {'range': [8, 10], 'color': "red"},
-        ]
-    }
-))
-
-# Menampilkan widget
-st.write("### Data Terbaru:")
-st.plotly_chart(fig, use_container_width=True)
-st.write(f"**Time:** {latest_time.strftime('%H:%M')}")
