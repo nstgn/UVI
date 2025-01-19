@@ -111,7 +111,7 @@ st.markdown(
     }
     </style>
     <div class="header">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Undip.png" alt="Logo">
+        <img src="https://images.app.goo.gl/aAEAaxFEqJCiDQkRA" alt="Logo">
         <h2>Real-Time Sensor Data</h2>
         <p>(THE DISPLAYED DATA IS REAL-TIME)</p>
     </div>
@@ -201,7 +201,7 @@ st.markdown(
     }
     </style>
     <div class="footer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Undip.png" alt="Logo">
+        <img src="https://images.app.goo.gl/aAEAaxFEqJCiDQkRA" alt="Logo">
         <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
         <p>Nastangini<br>20440102130112</p>
     </div>
