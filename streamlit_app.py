@@ -209,9 +209,10 @@ st.markdown(
         display: flex; /* Menggunakan flexbox */
         align-items: center;
         justify-content: space-between;
-        max-width: 1200px; /* Batas lebar */
+        max-width: 1400px; /* Batas lebar */
         margin: 0 auto; /* Pusatkan footer */
         box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambahan efek bayangan */
+        height: 50px; /* Tetapkan tinggi maksimum untuk footer */
     }
     .footer img {
         margin-left: 20px; /* Memberi jarak kiri */
@@ -219,7 +220,8 @@ st.markdown(
     }
     .footer .footer-text {
         text-align: right; /* Teks di kanan */
-        margin-right: 20px; /* Memberi jarak kanan */
+        margin-right: 10px; /* Memberi jarak kanan */
+        line-height: 1.2;
     }
     </style>
     <div class="footer">
