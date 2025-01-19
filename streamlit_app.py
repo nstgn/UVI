@@ -70,14 +70,14 @@ last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
 if minute_offset != 0:
-    last_time += pd.Timedelta(minutes=(30 - minute_offset))  # Bulatkan ke atas
+    last_time += pd.Timedelta(minutes=(30 - minute_offset))
 
 # Interval waktu 30 menit
 time_interval = pd.Timedelta(minutes=30)
 
 # Prediksi ke depan
 future_steps = 10
-last_sequence = X_test[-1]  # Ambil urutan terakhir dari data test
+last_sequence = X_test[-1]
 future_predictions = []
 future_times = [last_time + i * time_interval for i in range(1, future_steps + 1)]
 
@@ -122,14 +122,14 @@ st.markdown(
 # Streamlit Title
 st.markdown(
     """
-    <h1 style="text-align: center;">UV Index</h1>
+    <h1 style="text-align: center;">  UV Index</h1>
     """,
     unsafe_allow_html=True,
 )
 
-latest_data = data.iloc[-1]  # Data terbaru
-latest_time = latest_data.name  # Waktu dari indeks
-uv_index = latest_data['Index']  # Nilai Index
+latest_data = data.iloc[-1]
+latest_time = latest_data.name
+uv_index = latest_data['Index']
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
@@ -148,7 +148,7 @@ fig = go.Figure(go.Indicator(
     }
 ))
 
-# Menampilkan widget
+# Menampilkan saran
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
@@ -167,7 +167,7 @@ st.markdown(
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px;">
-        <p><b>Time:</b> {latest_time.strftime('%H:%M')}</p>
+        <p><b>Waktu:</b> {latest_time.strftime('%H:%M')}</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -218,6 +218,7 @@ for i, row in future_df.iterrows():
             unsafe_allow_html=True,
         )
 
+
 # Menambahkan tabel saran proteksi
 st.markdown(
     """
@@ -258,7 +259,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
 # Custom Footer
 st.markdown(
     """
@@ -266,16 +266,15 @@ st.markdown(
     .footer {
         position: fixed;
         bottom: 0;
-        right: 10px; /* Jarak dari sisi kanan layar */
-        font-size: 12px; /* Ukuran font kecil */
-        text-align: left; /* Teks rata kiri */
+        right: 10px;
+        font-size: 12px;
+        text-align: left;
         margin: 0;
-        padding: 5px 10px; /* Sedikit padding untuk kenyamanan */
-        border-radius: 5px; /* Opsional: tambahkan sedikit radius */
+        padding: 5px 10px;
     }
     </style>
     <div class="footer">
-        <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+        <p>Universitas Diponegoro<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
         <p>Nastangini<br>20440102130112</p>
     </div>
     """,
