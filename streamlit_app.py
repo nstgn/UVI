@@ -103,6 +103,7 @@ st.markdown(
     .header {
         background-color: #D6D6F5;
         padding: 20px; /* Tambahkan padding lebih untuk keseimbangan */
+        position: fixed;
         text-align: center;
         border-radius: 5px;
         display: flex;
@@ -115,14 +116,19 @@ st.markdown(
     }
     </style>
     <div class="header">
-        <img src="https://id.wikipedia.org/wiki/Universitas_Diponegoro#/media/Berkas:Undip.png" alt="Logo">
+        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
     </div>
     """,
     unsafe_allow_html=True
 )
 
 # Streamlit Title
-st.title("UV Index")
+st.markdown(
+    """
+    <h1 style="text-align: center;">UV Index</h1>
+    """,
+    unsafe_allow_html=True,
+)
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 uv_index = latest_data['Index']  # Nilai Index
@@ -149,7 +155,12 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.write(f"**Time:** {latest_time.strftime('%H:%M')}")
 
-st.title("UV Index Prediction")
+st.markdown(
+    """
+    <h1 style="text-align: center;">UV Index Prediction</h1>
+    """,
+    unsafe_allow_html=True,
+
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
@@ -197,7 +208,7 @@ st.markdown(
         padding: 20px; /* Padding yang sama seperti header */
         position: fixed;
         bottom: 0;
-        width: 80%;
+        width: 100%;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -209,7 +220,7 @@ st.markdown(
     }
     </style>
     <div class="footer">
-        <img src="https://id.wikipedia.org/wiki/Universitas_Diponegoro#/media/Berkas:Undip.png" alt="Logo">
+        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
         <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
         <p>Nastangini<br>20440102130112</p>
     </div>
