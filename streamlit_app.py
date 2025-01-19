@@ -126,6 +126,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 uv_index = latest_data['Index']  # Nilai Index
@@ -134,7 +135,6 @@ uv_index = latest_data['Index']  # Nilai Index
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
-    title={'text': "UV Level"},
     gauge={
         'axis': {'range': [0, 11]},
         'bar': {'color': "orange"},
@@ -212,7 +212,7 @@ st.markdown(
         max-width: 1400px; /* Batas lebar */
         margin: 0 auto; /* Pusatkan footer */
         box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambahan efek bayangan */
-        height: 50px; /* Tetapkan tinggi maksimum untuk footer */
+        height: 100px; /* Tetapkan tinggi maksimum untuk footer */
     }
     .footer img {
         margin-left: 20px; /* Memberi jarak kiri */
