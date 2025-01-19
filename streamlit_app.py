@@ -204,25 +204,40 @@ st.markdown(
     <style>
     .footer {
         background-color: #D6D6F5;
-        padding: 20px; /* Padding yang sama seperti header */
+        padding: 20px;
         position: fixed;
         bottom: 0;
         width: 100%;
-        text-align: right;
-        display: flex;
-        flex-direction: column;
-        align-items: left; /* Pusatkan elemen secara vertikal */
+        max-width: 1200px; /* Batas maksimal lebar */
+        margin: 0 auto; /* Pusatkan footer */
+        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambah bayangan agar lebih terlihat */
     }
     .footer img {
-        width: 80px; /* Sesuaikan ukuran gambar dengan header */
-        margin-bottom: 15px; /* Jarak di bawah logo */
+        width: 60px; /* Ukuran logo lebih proporsional */
+        margin-bottom: 10px;
+    }
+    .footer-content {
+        display: flex;
+        justify-content: space-between; /* Rata kiri-kanan antara logo dan teks */
+        align-items: center; /* Tengah vertikal */
+    }
+    .footer-text {
+        text-align: left;
+        font-size: 14px; /* Ukuran font yang lebih kecil */
+        line-height: 1.5; /* Jarak antar baris */
+        margin-left: 10px;
     }
     </style>
     <div class="footer">
-        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
-        <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
-        <p>Nastangini<br>20440102130112</p>
+        <div class="footer-content">
+            <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
+            <div class="footer-text">
+                <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+                <p>Nastangini<br>20440102130112</p>
+            </div>
+        </div>
     </div>
     """,
     unsafe_allow_html=True
 )
+
