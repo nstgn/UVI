@@ -103,7 +103,6 @@ st.markdown(
     .header {
         background-color: #D6D6F5;
         padding: 20px; /* Tambahkan padding lebih untuk keseimbangan */
-        position: fixed;
         text-align: center;
         border-radius: 5px;
         display: flex;
@@ -112,7 +111,7 @@ st.markdown(
     }
     .header img {
         width: 80px; /* Sesuaikan ukuran gambar */
-        margin-bottom: 10px; /* Tambahkan jarak di bawah logo */
+        margin-bottom: 15px; /* Tambahkan jarak di bawah logo */
     }
     </style>
     <div class="header">
@@ -209,14 +208,14 @@ st.markdown(
         position: fixed;
         bottom: 0;
         width: 100%;
-        text-align: center;
+        text-align: right;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Pusatkan elemen secara vertikal */
+        align-items: left; /* Pusatkan elemen secara vertikal */
     }
     .footer img {
         width: 80px; /* Sesuaikan ukuran gambar dengan header */
-        margin-bottom: 10px; /* Jarak di bawah logo */
+        margin-bottom: 15px; /* Jarak di bawah logo */
     }
     </style>
     <div class="footer">
