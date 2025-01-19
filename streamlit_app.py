@@ -149,28 +149,25 @@ fig = go.Figure(go.Indicator(
 ))
 
 # Menampilkan widget
-st.plotly_chart(fig, use_container_width=True)
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.plotly_chart(fig, use_container_width=True)
+with col2:
+    st.markdown(
+        f"""
+        <h2 style="text-align: center;">Saran Proteksi</h2>
+        <div style="text-align: center;">
+        {"<p style='color: green;'>Tingkat aman, gunakan sunscreen SPF 30+ atau kacamata hitam.</p>" if uv_index <= 2 else
+         "<p style='color: yellow;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam.</p>" if uv_index <= 5 else
+         "<p style='color: orange;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
+         "<p style='color: red;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
+         "<p style='color: purple;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 st.write(f"**Time:** {latest_time.strftime('%H:%M')}")
-
-# Menampilkan tabel saran proteksi sesuai dengan UV Index
-if uv_index <= 2:
-    saran = "<p style='color: green;'>Tingkat aman, gunakan sunscreen SPF 30+ atau kacamata hitam.</p>"
-elif uv_index <= 5:
-    saran = "<p style='color: yellow;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam.</p>"
-elif uv_index <= 7:
-    saran = "<p style='color: orange;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>"
-elif uv_index <= 10:
-    saran = "<p style='color: red;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>"
-else:
-    saran = "<p style='color: purple;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"
-
-st.markdown(
-    f"""
-    <h2 style="text-align: center;">Saran Proteksi</h2>
-    <div style="text-align: center;">{saran}</div>
-    """,
-    unsafe_allow_html=True,
-)
 
 st.markdown(
     """
