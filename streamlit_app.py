@@ -209,6 +209,8 @@ st.markdown(
         display: flex; /* Menggunakan flexbox */
         align-items: center;
         justify-content: space-between;
+        max-width: 1200px; /* Batas lebar */
+        margin: 0 auto; /* Pusatkan footer */
         box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambahan efek bayangan */
     }
     .footer img {
@@ -221,7 +223,7 @@ st.markdown(
     }
     </style>
     <div class="footer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Undip.png" alt="Logo">
+        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
         <div class="footer-text">
             <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
             <p>Nastangini<br>20440102130112</p>
