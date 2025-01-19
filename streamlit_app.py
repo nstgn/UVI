@@ -199,9 +199,9 @@ st.markdown(
         padding: 20px; /* Padding yang sama seperti header */
         position: fixed;
         bottom: 0;
-        #width: 100%;
+        width: 100%;
         text-align: center;
-        border-radius: 5px; /* Tambahkan border-radius agar simetri */
+       # border-radius: 5px; /* Tambahkan border-radius agar simetri */
         display: flex;
         flex-direction: column;
         align-items: center; /* Pusatkan elemen secara vertikal */
