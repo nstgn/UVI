@@ -96,22 +96,19 @@ future_df = pd.DataFrame({
 
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
+
 # Custom Header
 st.markdown(
     """
     <style>
     .header {
         background-color: #D6D6F5;
-        padding: 20px;
+        padding: 10px;
         text-align: center;
         border-radius: 5px;
-        width: 100%;
-        position: fixed; 
-        z-index: 1000; /* Pastikan berada di atas elemen lain */
     }
     .header img {
-        width: 80px; /* Ukuran gambar */
-        margin-bottom: 10px; /* Jarak di bawah gambar */
+        width: 60px;
     }
     </style>
     <div class="header">
@@ -199,39 +196,35 @@ for i, row in future_df.iterrows():
             unsafe_allow_html=True,
         )
         
+# Custom Footer
 st.markdown(
     """
     <style>
     .footer {
         background-color: #D6D6F5;
-        padding: 20px; /* Padding lebih kecil */
-        position: fixed;
-        width: 100%; /* Lebar penuh */
-        text-align: center;
+        padding: 10px;
+        position: fixed; /* Menjaga footer tetap di bawah layar */
+        bottom: 0;
+        width: 100%;
+        display: flex; /* Menggunakan flexbox */
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambahan efek bayangan */
     }
     .footer img {
-        width: 80px; /* Ukuran logo lebih proporsional */
-        margin-bottom: 5px; /* Jarak di bawah logo */
+        margin-left: 20px; /* Memberi jarak kiri */
+        width: 60px;
     }
-    .footer-content {
-        display: flex;
-        justify-content: space-between; /* Rata kiri-kanan antara logo dan teks */
-        align-items: center; /* Tengah vertikal */
-    }
-    .footer-text {
-        text-align: left;
-        font-size: 14px; /* Ukuran font yang lebih kecil */
-        line-height: 1.5; /* Jarak antar baris */
-        margin-left: 10px;
+    .footer .footer-text {
+        text-align: right; /* Teks di kanan */
+        margin-right: 20px; /* Memberi jarak kanan */
     }
     </style>
     <div class="footer">
-        <div class="footer-content">
-            <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
-            <div class="footer-text">
-                <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
-                <p>Nastangini<br>20440102130112</p>
-            </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Undip.png" alt="Logo">
+        <div class="footer-text">
+            <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+            <p>Nastangini<br>20440102130112</p>
         </div>
     </div>
     """,
