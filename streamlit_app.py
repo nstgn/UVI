@@ -208,12 +208,12 @@ st.markdown(
         position: fixed;
         bottom: 0;
         width: 100%;
-        max-width: 1200px; /* Batas maksimal lebar */
+        max-width: 1400px; /* Batas maksimal lebar */
         margin: 0 auto; /* Pusatkan footer */
         box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambah bayangan agar lebih terlihat */
     }
     .footer img {
-        width: 60px; /* Ukuran logo lebih proporsional */
+        width: 80px; /* Ukuran logo lebih proporsional */
         margin-bottom: 10px;
     }
     .footer-content {
