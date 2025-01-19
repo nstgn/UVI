@@ -96,22 +96,23 @@ future_df = pd.DataFrame({
 
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
-# Custom Header
 st.markdown(
     """
     <style>
     .header {
         background-color: #D6D6F5;
-        padding: 20px; /* Tambahkan padding lebih untuk keseimbangan */
+        padding: 10px; /* Padding yang proporsional */
         text-align: center;
         border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Pusatkan elemen secara vertikal */
+        width: 100%; /* Lebar penuh */
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk estetika */
+        position: fixed; /* Tetap di atas meskipun di-scroll */
+        top: 0; /* Letakkan di bagian atas */
+        z-index: 1000; /* Pastikan berada di atas elemen lain */
     }
     .header img {
-        width: 80px; /* Sesuaikan ukuran gambar */
-        margin-bottom: 15px; /* Tambahkan jarak di bawah logo */
+        width: 80px; /* Ukuran gambar */
+        margin-bottom: 10px; /* Jarak di bawah gambar */
     }
     </style>
     <div class="header">
@@ -120,6 +121,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # Streamlit Title
 st.markdown(
@@ -198,46 +200,36 @@ for i, row in future_df.iterrows():
             unsafe_allow_html=True,
         )
         
-# Custom Footer
 st.markdown(
     """
     <style>
     .footer {
         background-color: #D6D6F5;
-        padding: 20px;
+        padding: 10px; /* Padding lebih kecil */
         position: fixed;
         bottom: 0;
-        width: 100%;
-        max-width: 1400px; /* Batas maksimal lebar */
-        margin: 0 auto; /* Pusatkan footer */
-        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambah bayangan agar lebih terlihat */
+        width: 100%; /* Lebar penuh */
+        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Bayangan untuk estetika */
+        z-index: 1000; /* Pastikan berada di atas elemen lain */
+        text-align: center;
     }
     .footer img {
         width: 80px; /* Ukuran logo lebih proporsional */
-        margin-bottom: 10px;
+        margin-bottom: 5px; /* Jarak di bawah logo */
     }
     .footer-content {
-        display: flex;
-        justify-content: space-between; /* Rata kiri-kanan antara logo dan teks */
-        align-items: center; /* Tengah vertikal */
-    }
-    .footer-text {
-        text-align: left;
-        font-size: 14px; /* Ukuran font yang lebih kecil */
+        text-align: center;
+        font-size: 14px; /* Ukuran font */
         line-height: 1.5; /* Jarak antar baris */
-        margin-left: 10px;
     }
     </style>
     <div class="footer">
+        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
         <div class="footer-content">
-            <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
-            <div class="footer-text">
-                <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
-                <p>Nastangini<br>20440102130112</p>
-            </div>
+            <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+            <p>Nastangini<br>20440102130112</p>
         </div>
     </div>
     """,
     unsafe_allow_html=True
 )
-
