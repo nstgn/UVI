@@ -96,18 +96,17 @@ future_df = pd.DataFrame({
 
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
+# Custom Header
 st.markdown(
     """
     <style>
     .header {
         background-color: #D6D6F5;
-        padding: 10px; /* Padding yang proporsional */
+        padding: 20px;
         text-align: center;
         border-radius: 5px;
-        width: 100%; /* Lebar penuh */
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk estetika */
-        position: fixed; /* Tetap di atas meskipun di-scroll */
-        top: 0; /* Letakkan di bagian atas */
+        width: 100%;
+        position: fixed; 
         z-index: 1000; /* Pastikan berada di atas elemen lain */
     }
     .header img {
@@ -205,12 +204,9 @@ st.markdown(
     <style>
     .footer {
         background-color: #D6D6F5;
-        padding: 10px; /* Padding lebih kecil */
+        padding: 20px; /* Padding lebih kecil */
         position: fixed;
-        bottom: 0;
         width: 100%; /* Lebar penuh */
-        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Bayangan untuk estetika */
-        z-index: 1000; /* Pastikan berada di atas elemen lain */
         text-align: center;
     }
     .footer img {
@@ -218,16 +214,24 @@ st.markdown(
         margin-bottom: 5px; /* Jarak di bawah logo */
     }
     .footer-content {
-        text-align: center;
-        font-size: 14px; /* Ukuran font */
+        display: flex;
+        justify-content: space-between; /* Rata kiri-kanan antara logo dan teks */
+        align-items: center; /* Tengah vertikal */
+    }
+    .footer-text {
+        text-align: left;
+        font-size: 14px; /* Ukuran font yang lebih kecil */
         line-height: 1.5; /* Jarak antar baris */
+        margin-left: 10px;
     }
     </style>
     <div class="footer">
-        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
         <div class="footer-content">
-            <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
-            <p>Nastangini<br>20440102130112</p>
+            <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
+            <div class="footer-text">
+                <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+                <p>Nastangini<br>20440102130112</p>
+            </div>
         </div>
     </div>
     """,
