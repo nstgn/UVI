@@ -115,9 +115,7 @@ st.markdown(
     }
     </style>
     <div class="header">
-        <img src="https://images.app.goo.gl/aAEAaxFEqJCiDQkRA" alt="Logo">
-        <h2>Real-Time Sensor Data</h2>
-        <p>(THE DISPLAYED DATA IS REAL-TIME)</p>
+        <img src="https://id.wikipedia.org/wiki/Universitas_Diponegoro#/media/Berkas:Undip.png" alt="Logo">
     </div>
     """,
     unsafe_allow_html=True
@@ -199,9 +197,8 @@ st.markdown(
         padding: 20px; /* Padding yang sama seperti header */
         position: fixed;
         bottom: 0;
-        width: 100%;
+        width: 80%;
         text-align: center;
-       # border-radius: 5px; /* Tambahkan border-radius agar simetri */
         display: flex;
         flex-direction: column;
         align-items: center; /* Pusatkan elemen secara vertikal */
@@ -212,7 +209,7 @@ st.markdown(
     }
     </style>
     <div class="footer">
-        <img src="https://images.app.goo.gl/aAEAaxFEqJCiDQkRA" alt="Logo">
+        <img src="https://id.wikipedia.org/wiki/Universitas_Diponegoro#/media/Berkas:Undip.png" alt="Logo">
         <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
         <p>Nastangini<br>20440102130112</p>
     </div>
