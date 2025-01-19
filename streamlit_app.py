@@ -160,7 +160,7 @@ st.markdown(
     <h1 style="text-align: center;">UV Index Prediction</h1>
     """,
     unsafe_allow_html=True,
-
+)
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
