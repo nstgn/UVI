@@ -201,35 +201,18 @@ st.markdown(
     """
     <style>
     .footer {
-        background-color: #D6D6F5;
-        padding: 10px;
-        position: fixed; /* Menjaga footer tetap di bawah layar */
+        text-align: center; /* Teks di tengah */
+        font-size: 12px; /* Ukuran font kecil */
+        position: fixed;
         bottom: 0;
         width: 100%;
-        display: flex; /* Menggunakan flexbox */
-        align-items: center;
-        justify-content: space-between;
-        max-width: 1400px; /* Batas lebar */
-        margin: 0 auto; /* Pusatkan footer */
-        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Tambahan efek bayangan */
-        height: 100px; /* Tetapkan tinggi maksimum untuk footer */
-    }
-    .footer img {
-        margin-left: 20px; /* Memberi jarak kiri */
-        width: 60px;
-    }
-    .footer .footer-text {
-        text-align: right; /* Teks di kanan */
-        margin-right: 10px; /* Memberi jarak kanan */
-        line-height: 1.2;
+        margin: 0;
+        padding: 5px 0; /* Mengurangi tinggi */
     }
     </style>
     <div class="footer">
-        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
-        <div class="footer-text">
-            <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
-            <p>Nastangini<br>20440102130112</p>
-        </div>
+        <p>Universitas Diponegoro<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+        <p>Nastangini<br>20440102130112</p>
     </div>
     """,
     unsafe_allow_html=True
