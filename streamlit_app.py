@@ -201,8 +201,8 @@ st.markdown(
     """
     <style>
     .footer {
-        text-align: center; /* Teks di tengah */
-        font-size: 12px; /* Ukuran font kecil */
+        text-align: right; 
+        font-size: 12px;
         position: fixed;
         bottom: 0;
         width: 100%;
