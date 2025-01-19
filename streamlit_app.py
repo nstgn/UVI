@@ -102,12 +102,16 @@ st.markdown(
     <style>
     .header {
         background-color: #D6D6F5;
-        padding: 10px;
+        padding: 20px; /* Tambahkan padding lebih untuk keseimbangan */
         text-align: center;
         border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Pusatkan elemen secara vertikal */
     }
     .header img {
-        width: 60px;
+        width: 80px; /* Sesuaikan ukuran gambar */
+        margin-bottom: 10px; /* Tambahkan jarak di bawah logo */
     }
     </style>
     <div class="header">
@@ -118,6 +122,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 # Streamlit Title
 st.title("UV Index")
 latest_data = data.iloc[-1]  # Data terbaru
@@ -184,20 +189,26 @@ for i, row in future_df.iterrows():
             """,
             unsafe_allow_html=True,
         )
+        
 # Custom Footer
 st.markdown(
     """
     <style>
     .footer {
         background-color: #D6D6F5;
-        padding: 10px;
+        padding: 20px; /* Padding yang sama seperti header */
         position: fixed;
         bottom: 0;
         width: 100%;
         text-align: center;
+        border-radius: 5px; /* Tambahkan border-radius agar simetri */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Pusatkan elemen secara vertikal */
     }
     .footer img {
-        width: 60px;
+        width: 80px; /* Sesuaikan ukuran gambar dengan header */
+        margin-bottom: 10px; /* Jarak di bawah logo */
     }
     </style>
     <div class="footer">
@@ -208,4 +219,3 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
