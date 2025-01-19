@@ -122,14 +122,14 @@ st.markdown(
 # Streamlit Title
 st.markdown(
     """
-    <h1 style="text-align: center;">  UV Index</h1>
+    <h1 style="text-align: center;">UV Index</h1>
     """,
     unsafe_allow_html=True,
 )
 
-latest_data = data.iloc[-1]
-latest_time = latest_data.name
-uv_index = latest_data['Index']
+latest_data = data.iloc[-1]  # Data terbaru
+latest_time = latest_data.name  # Waktu dari indeks
+uv_index = latest_data['Index']  # Nilai Index
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
@@ -148,7 +148,7 @@ fig = go.Figure(go.Indicator(
     }
 ))
 
-# Menampilkan saran
+# Menampilkan widget
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
@@ -167,7 +167,7 @@ st.markdown(
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px;">
-        <p><b>Waktu:</b> {latest_time.strftime('%H:%M')}</p>
+        <p><b>Time:</b> {latest_time.strftime('%H:%M')}</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -217,7 +217,6 @@ for i, row in future_df.iterrows():
             """,
             unsafe_allow_html=True,
         )
-
 
 # Menambahkan tabel saran proteksi
 st.markdown(
