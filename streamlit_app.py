@@ -120,6 +120,7 @@ st.markdown(
 
 
 # Streamlit Title
+# Streamlit Title
 st.markdown(
     """
     <h1 style="text-align: center;">UV Index</h1>
@@ -158,6 +159,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
@@ -183,7 +185,7 @@ for i, row in future_df.iterrows():
             icon = "🟣"
             desc = "Extreme"
             bg_color = "#9900cc"
-        
+
         # Kustomisasi tampilan grid
         st.markdown(
             f"""
@@ -195,7 +197,47 @@ for i, row in future_df.iterrows():
             """,
             unsafe_allow_html=True,
         )
-        
+
+# Menambahkan tabel saran proteksi
+st.markdown(
+    """
+    <h1 style="text-align: center;">Saran Proteksi Berdasarkan UV Index</h1>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <table style="width:100%; border-collapse: collapse; text-align: center;">
+        <tr>
+            <th style="border: 1px solid black; padding: 8px;">UV Index</th>
+            <th style="border: 1px solid black; padding: 8px;">Proteksi</th>
+        </tr>
+        <tr style="background-color: #00ff00;">
+            <td style="border: 1px solid black; padding: 8px;">0-2 (Low)</td>
+            <td style="border: 1px solid black; padding: 8px;">Tingkat aman, gunakan sunscreen SPF 30+ atau kacamata hitam.</td>
+        </tr>
+        <tr style="background-color: #ffcc00;">
+            <td style="border: 1px solid black; padding: 8px;">3-5 (Moderate)</td>
+            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam.</td>
+        </tr>
+        <tr style="background-color: #ff6600;">
+            <td style="border: 1px solid black; padding: 8px;">6-7 (High)</td>
+            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</td>
+        </tr>
+        <tr style="background-color: #ff0000; color: white;">
+            <td style="border: 1px solid black; padding: 8px;">8-10 (Very High)</td>
+            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</td>
+        </tr>
+        <tr style="background-color: #9900cc; color: white;">
+            <td style="border: 1px solid black; padding: 8px;">11+ (Extreme)</td>
+            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</td>
+        </tr>
+    </table>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Custom Footer
 st.markdown(
     """
@@ -208,8 +250,6 @@ st.markdown(
         text-align: left; /* Teks rata kiri */
         margin: 0;
         padding: 5px 10px; /* Sedikit padding untuk kenyamanan */
-        background-color: #FFFFFF; /* Opsional: latar putih agar jelas */
-        border: 1px solid #DDD; /* Opsional: beri border agar lebih terlihat */
         border-radius: 5px; /* Opsional: tambahkan sedikit radius */
     }
     </style>
