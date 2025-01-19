@@ -201,17 +201,20 @@ st.markdown(
     """
     <style>
     .footer {
-        text-align: right; 
-        font-size: 12px;
         position: fixed;
         bottom: 0;
-        width: 100%;
+        right: 10px; /* Jarak dari sisi kanan layar */
+        font-size: 12px; /* Ukuran font kecil */
+        text-align: left; /* Teks rata kiri */
         margin: 0;
-        padding: 5px 0; /* Mengurangi tinggi */
+        padding: 5px 10px; /* Sedikit padding untuk kenyamanan */
+        background-color: #FFFFFF; /* Opsional: latar putih agar jelas */
+        border: 1px solid #DDD; /* Opsional: beri border agar lebih terlihat */
+        border-radius: 5px; /* Opsional: tambahkan sedikit radius */
     }
     </style>
     <div class="footer">
-        <p>Universitas Diponegoro<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
+        <p>Diponegoro University<br>Fakultas Sains dan Matematika<br>Departemen Fisika</p>
         <p>Nastangini<br>20440102130112</p>
     </div>
     """,
