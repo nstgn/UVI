@@ -154,8 +154,8 @@ st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
     <div style="text-align: center; margin-top: -20px; font-size: smaller;">
-    {"<p style='color: green;'>Tingkat aman, gunakan sunscreen SPF 30+ atau kacamata hitam.</p>" if uv_index <= 2 else
-     "<p style='color: yellow;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam.</p>" if uv_index <= 5 else
+    {"<p style='color: green;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
+     "<p style='color: yellow;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
      "<p style='color: orange;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
      "<p style='color: red;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
      "<p style='color: purple;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
@@ -229,30 +229,63 @@ st.markdown(
 
 st.markdown(
     """
-    <table style="width:100%; border-collapse: collapse; text-align: center;">
+    <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
         <tr>
-            <th style="border: 1px solid black; padding: 8px;">UV Index</th>
-            <th style="border: 1px solid black; padding: 8px;">Proteksi</th>
+            <th style="border: 1px solid black; padding: 10px; background-color: #f2f2f2;">Kategori</th>
+            <th style="border: 1px solid black; padding: 10px; background-color: #f2f2f2;">Himbauan</th>
         </tr>
-        <tr style="background-color: #00ff00;">
-            <td style="border: 1px solid black; padding: 8px;">0-2 (Low)</td>
-            <td style="border: 1px solid black; padding: 8px;">Tingkat aman, gunakan sunscreen SPF 30+ atau kacamata hitam.</td>
+        <tr>
+            <td style="border: 1px solid black; padding: 10px;">Low (risiko bahaya rendah)</td>
+            <td style="border: 1px solid black; padding: 10px;">
+                <ul>
+                    <li>Tingkat bahaya rendah bagi orang banyak.</li>
+                    <li>Kenakan kacamata hitam pada hari yang cerah.</li>
+                    <li>Gunakan cairan pelembab tabir surya SPF 30+ bagi kulit sensitif.</li>
+                    <li>Permukaan yang cerah, seperti pasir, air, dan salju, akan meningkatkan paparan UV.</li>
+                </ul>
+            </td>
         </tr>
-        <tr style="background-color: #ffcc00;">
-            <td style="border: 1px solid black; padding: 8px;">3-5 (Moderate)</td>
-            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam.</td>
+        <tr>
+            <td style="border: 1px solid black; padding: 10px;">Moderate (risiko bahaya sedang)</td>
+            <td style="border: 1px solid black; padding: 10px;">
+                <ul>
+                    <li>Tingkat bahaya sedang bagi orang yang terpapar matahari tanpa pelindung.</li>
+                    <li>Tetap di tempat teduh pada saat matahari terik siang hari.</li>
+                    <li>Kenakan pakaian pelindung matahari, topi lebar, dan kacamata hitam yang menghalangi sinar UV, pada saat berada di luar ruangan.</li>
+                    <li>Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam bahkan pada hari berawan, setelah berenang atau berkeringat.</li>
+                </ul>
+            </td>
         </tr>
-        <tr style="background-color: #ff6600;">
-            <td style="border: 1px solid black; padding: 8px;">6-7 (High)</td>
-            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</td>
+        <tr>
+            <td style="border: 1px solid black; padding: 10px;">High (risiko bahaya tinggi)</td>
+            <td style="border: 1px solid black; padding: 10px;">
+                <ul>
+                    <li>Tingkat bahaya tinggi bagi orang yang terpapar matahari tanpa pelindung, diperlukan pelindung untuk menghindari kerusakan mata dan kulit.</li>
+                    <li>Kurangi waktu di bawah paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</li>
+                    <li>Kenakan pakaian pelindung matahari, topi lebar, dan kacamata hitam yang menghalangi sinar UV, pada saat berada di luar ruangan.</li>
+                    <li>Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam bahkan pada hari berawan, setelah berenang atau berkeringat.</li>
+                </ul>
+            </td>
         </tr>
-        <tr style="background-color: #ff0000; color: white;">
-            <td style="border: 1px solid black; padding: 8px;">8-10 (Very High)</td>
-            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</td>
+        <tr>
+            <td style="border: 1px solid black; padding: 10px;">Very High (risiko bahaya sangat tinggi)</td>
+            <td style="border: 1px solid black; padding: 10px;">
+                <ul>
+                    <li>Minimal waktu di bawah paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</li>
+                    <li>Tetap di tempat teduh pada saat matahari terik siang hari.</li>
+                    <li>Kenakan pakaian pelindung matahari, topi lebar, dan kacamata hitam yang menghalangi sinar UV, pada saat berada di luar ruangan.</li>
+                    <li>Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam bahkan pada hari berawan, setelah berenang atau berkeringat.</li>
+                </ul>
+            </td>
         </tr>
-        <tr style="background-color: #9900cc; color: white;">
-            <td style="border: 1px solid black; padding: 8px;">11+ (Extreme)</td>
-            <td style="border: 1px solid black; padding: 8px;">Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</td>
+        <tr>
+            <td style="border: 1px solid black; padding: 10px;">Extreme (risiko bahaya ekstrem)</td>
+            <td style="border: 1px solid black; padding: 10px;">
+                <ul>
+                    <li>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</li>
+                    <li>Hindari paparan matahari langsung dan pastikan perlindungan maksimal.</li>
+                </ul>
+            </td>
         </tr>
     </table>
     """,
