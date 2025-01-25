@@ -131,7 +131,7 @@ st.markdown(
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
-uv_index = 1
+uv_index = 5
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
@@ -177,6 +177,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
+
+
 st.markdown(
     """
     <h1 style="text-align: center;">UV Index Prediction</h1>
@@ -221,6 +224,9 @@ for i, row in future_df.iterrows():
             """,
             unsafe_allow_html=True,
         )
+
+
+
 
 
 # Menambahkan tabel saran proteksi
