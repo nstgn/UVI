@@ -131,7 +131,7 @@ st.markdown(
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
-uv_index = 5
+uv_index = 7
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
@@ -170,7 +170,7 @@ st.markdown(
 # Menambahkan widget waktu
 st.markdown(
     f"""
-    <div style="text-align: center; font-size: medium; margin-top: 10px;">
+    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 30px;">
         <p><b>Waktu:</b> {latest_time.strftime('%H:%M')}</p>
     </div>
     """,
@@ -232,7 +232,7 @@ for i, row in future_df.iterrows():
 # Menambahkan tabel saran proteksi
 st.markdown(
     """
-    <h1 style="text-align: center;">Tabel Saran Proteksi</h1>
+    <h1 style="text-align: center;margin-bottom: 30px;">Tabel Saran Proteksi</h1>
     """,
     unsafe_allow_html=True,
 )
