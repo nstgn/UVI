@@ -145,7 +145,7 @@ fig = go.Figure(go.Indicator(
             {'range': [3, 6], 'color': "#ffff00"},
             {'range': [6, 8], 'color': "#ff6600"},
             {'range': [8, 10], 'color': "#ff0000"},
-            {'range': [10,11], 'color': "#9900cc"},
+            {'range': [10,12], 'color': "#9900cc"},
         ]
     }
 ))
