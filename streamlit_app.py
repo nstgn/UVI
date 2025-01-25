@@ -61,7 +61,7 @@ model = Sequential([
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 #9 Pelatihan Model
-history=model.fit(X_train, y_train, epochs=10, batch_size=8, validation_data=(X_test, y_test), verbose=1)
+history=model.fit(X_train, y_train, epochs=100, batch_size=8, validation_data=(X_test, y_test), verbose=1)
 
 #10 Prediksi Model
 train_predicted = model.predict(X_train)
@@ -97,7 +97,6 @@ future_df = pd.DataFrame({
 
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
 
-
 # Custom Header
 st.markdown(
     """
@@ -106,6 +105,7 @@ st.markdown(
         background-color: #D6D6F5;
         padding: 10px;
         text-align: center;
+        justify-content: center;
         border-radius: 5px;
     }
     .header img {
@@ -118,7 +118,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 # Streamlit Title
 st.markdown(
@@ -153,7 +152,7 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
-    <div style="text-align: center; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 10px;">
         <div style="display: inline-block; font-size: smaller; border-radius: 8px; padding: 10px 15px; 
                     background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
     {"<p style='color: #00ff00;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
@@ -169,15 +168,12 @@ st.markdown(
 # Menambahkan widget waktu
 st.markdown(
     f"""
-    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 50px;">
+    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
         <p><b>Waktu:</b> {latest_time.strftime('%H:%M')}</p>
     </div>
     """,
     unsafe_allow_html=True,
 )
-
-
-
 
 st.markdown(
     """
@@ -224,14 +220,10 @@ for i, row in future_df.iterrows():
             unsafe_allow_html=True,
         )
 
-
-
-
-
 # Menambahkan tabel saran proteksi
 st.markdown(
     """
-    <h1 style="text-align: center;margin-top: 50px; margin-bottom: 10px;">Tabel Saran Proteksi</h1>
+    <h1 style="text-align: center;margin-top: 40px; margin-bottom: 10px;">Tabel Saran Proteksi</h1>
     """,
     unsafe_allow_html=True,
 )
@@ -309,7 +301,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
 # Custom Footer
 st.markdown(
     """
@@ -317,7 +308,7 @@ st.markdown(
     .footer {
         position: fixed;
         bottom: 0;
-        left: 30px;
+        left: 50px;
         font-size: 12px;
         text-align: left;
         margin: 0;
