@@ -154,7 +154,7 @@ st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
     <div style="text-align: center; margin-top: 20px;">
-        <div style="display: inline-block; font-size: smaller; border: 1px solid #ddd; border-radius: 8px; padding: 10px 15px; 
+        <div style="display: inline-block; font-size: smaller; border-radius: 8px; padding: 10px 15px; 
                     background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
     {"<p style='color: #00ff00;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
      "<p style='color: #ffff00;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
