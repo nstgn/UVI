@@ -122,7 +122,7 @@ st.markdown(
 # Streamlit Title
 st.markdown(
     """
-    <h1 style="text-align: center; margin-bottom: 10px;">UV Index</h1>
+    <h1 style="text-align: center; ">UV Index</h1>
     """,
     unsafe_allow_html=True,
 )
@@ -130,7 +130,7 @@ st.markdown(
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
-uv_index = 7
+uv_index = 9
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
@@ -152,7 +152,7 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
-    <div style="text-align: center; margin-top: 2px;">
+    <div style="text-align: center;">
         <span style="display: inline-block; padding: 5px 15px; border-radius: 5px;
                     background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
             {"<p style='color: #00ff00;'><strong>✅ Tingkat aman:</strong> Gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
