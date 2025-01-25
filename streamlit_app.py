@@ -61,7 +61,7 @@ model = Sequential([
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 #9 Pelatihan Model
-history=model.fit(X_train, y_train, epochs=10, batch_size=8, validation_data=(X_test, y_test), verbose=1)
+history=model.fit(X_train, y_train, epochs=50, batch_size=8, validation_data=(X_test, y_test), verbose=1)
 
 #10 Prediksi Model
 train_predicted = model.predict(X_train)
@@ -152,14 +152,17 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
-    <div style="text-align: center; margin-top: 5px;">
-        <div style="display: inline-block; font-size: smaller; padding: 10px; 
-                    background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
-    {"<p style='color: #00ff00;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
-     "<p style='color: #ffcc00;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
-     "<p style='color: #ff6600;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
-     "<p style='color: #ff0000;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
-     "<p style='color: #9900cc;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
+    <div style="text-align: center; margin-top: 5px; padding: 20px; border-radius: 10px; 
+                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                 background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
+        <h3 style="margin: 0; font-size: 24px; color: #333;">UV Index Level: {uv_index}</h3>
+        <div style="font-size: 16px; margin-top: 10px;">
+            {"<p style='color: #00ff00;'><strong>✅ Tingkat aman:</strong> Gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
+             "<p style='color: #ffcc00;'><strong>⚠️ Tingkat bahaya sedang:</strong> Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
+             "<p style='color: #ff6600;'><strong>⚠️ Tingkat bahaya tinggi:</strong> Kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
+             "<p style='color: #ff0000;'><strong>⚠️ Tingkat bahaya sangat tinggi:</strong> Tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
+             "<p style='color: #9900cc;'><strong>❗ Tingkat bahaya ekstrem:</strong> Diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
