@@ -130,8 +130,7 @@ st.markdown(
 
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
-#uv_index = latest_data['Index']  # Nilai Index
-uv_index = 11
+uv_index = latest_data['Index']  # Nilai Index
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
@@ -156,7 +155,7 @@ st.markdown(
     f"""
     <div style="text-align: center; margin-top: 20px;">
         <div style="display: inline-block; font-size: smaller; border: 1px solid #ddd; border-radius: 8px; padding: 10px 15px; 
-                    background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#ce8aff'};">
+                    background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
     {"<p style='color: #00ff00;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
      "<p style='color: #ffff00;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
      "<p style='color: #ff6600;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
@@ -318,7 +317,7 @@ st.markdown(
     .footer {
         position: fixed;
         bottom: 0;
-        left: 10px;
+        left: 30px;
         font-size: 12px;
         text-align: left;
         margin: 0;
