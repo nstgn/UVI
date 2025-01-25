@@ -61,7 +61,7 @@ model = Sequential([
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 #9 Pelatihan Model
-history=model.fit(X_train, y_train, epochs=50, batch_size=8, validation_data=(X_test, y_test), verbose=1)
+history=model.fit(X_train, y_train, epochs=10, batch_size=8, validation_data=(X_test, y_test), verbose=1)
 
 #10 Prediksi Model
 train_predicted = model.predict(X_train)
@@ -182,7 +182,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Tampilan grid prakiraan        
+# Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
     with cols[i]:
@@ -194,7 +194,7 @@ for i, row in future_df.iterrows():
         elif uv_level < 6:
             icon = "🟡"
             desc = "Moderate"
-            bg_color = "#ffcc00"
+            bg_color = "#ffe600"
         elif uv_level < 8:
             icon = "🟠"
             desc = "High"
@@ -207,18 +207,18 @@ for i, row in future_df.iterrows():
             icon = "🟣"
             desc = "Extreme"
             bg_color = "#9900cc"
-            
-# Kustomisasi tampilan grid
-st.markdown(
-    f"""
-     <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
-         <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
-         <h2 style="color:white;">{icon} {uv_level}</h2>
-         <p style="color:white;">{desc}</p>
-    </div>
-     """,
-     unsafe_allow_html=True,
- )
+
+        # Kustomisasi tampilan grid
+        st.markdown(
+            f"""
+            <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
+                <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
+                <h2 style="color:white;">{icon} {uv_level}</h2>
+                <p style="color:white;">{desc}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 # Menambahkan tabel saran proteksi
 st.markdown(
