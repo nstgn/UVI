@@ -131,7 +131,7 @@ st.markdown(
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
-uv_index = 7
+uv_index = 1
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
@@ -139,7 +139,7 @@ fig = go.Figure(go.Indicator(
     value=uv_index,
     gauge={
         'axis': {'range': [0, 11]},
-        'bar': {'color': "#059605"},
+        'bar': {'color': "#9900cc"},
         'steps': [
             {'range': [0, 3], 'color': "#00ff00"},
             {'range': [3, 6], 'color': "#ffff00"},
