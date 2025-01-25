@@ -230,14 +230,14 @@ st.markdown(
 
 st.markdown(
     """
-    <table style="width:90%; border-collapse: collapse; text-align: center;">
+    <table style="width:100%; border-collapse: collapse; text-align: center;">
         <tr>
-            <th style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 2px solid black;">Kategori</th>
-            <th style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 2px solid black;">Himbauan</th>
+            <th style="border: 1px solid black; padding: 8px;">Kategori</th>
+            <th style="border: 1px solid black; padding: 8px;">Himbauan</th>
         </tr>
         <tr style="background-color: #00ff00;">
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">(Low)</td>
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">(Low)</td>
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
                     <li>Tingkat bahaya rendah bagi orang banyak.</li>
                     <li>Kenakan kacamata hitam pada hari yang cerah.</li>
@@ -247,8 +247,8 @@ st.markdown(
             </td>
         </tr>
         <tr style="background-color: #ffcc00;">
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">3-5 (Moderate)</td>
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">3-5 (Moderate)</td>
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
                     <li>Tingkat bahaya sedang bagi orang yang terpapar matahari tanpa pelindung.</li>
                     <li>Tetap di tempat teduh pada saat matahari terik siang hari.</li>
@@ -259,8 +259,8 @@ st.markdown(
             </td>
         </tr>
         <tr style="background-color: #ff6600;">
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">6-7 (High)</td>
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">6-7 (High)</td>
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
                     <li>Tingkat bahaya tinggi bagi orang yang terpapar matahari tanpa pelindung, diperlukan pelindung untuk menghindari kerusakan mata dan kulit.</li>
                     <li>Kurangi waktu di bawah paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</li>
@@ -271,8 +271,8 @@ st.markdown(
             </td>
         </tr>
         <tr style="background-color: #ff0000; color: white;">
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">8-10 (Very High)</td>
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;">
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">8-10 (Very High)</td>
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
                     <li>Tingkat bahaya tinggi bagi orang yang terpapar matahari tanpa pelindung, diperlukan pelindung untuk menghindari kerusakan mata dan kulit.</li>
                     <li>Minimal waktu di bawah paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</li>
@@ -284,8 +284,8 @@ st.markdown(
             </td>
         </tr>
         <tr style="background-color: #9900cc; color: white;">
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: none;">11+ (Extreme)</td>
-            <td style="padding: 8px; border-top: none; border-left: none; border-right: none; border-bottom: none;">
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">11+ (Extreme)</td>
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
                     <li>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</li>
                     <li>Hindari paparan matahari langsung dan pastikan perlindungan maksimal.</li>
