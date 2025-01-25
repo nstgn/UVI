@@ -157,12 +157,11 @@ st.markdown(
     <div style="text-align: center; margin-top: -20px;">
         <div style="display: inline-block; font-size: smaller; border: 1px solid #ddd; border-radius: 8px; padding: 10px 15px; 
                     background-color: {'#d4edda' if uv_index <= 2 else '#fff3cd' if uv_index <= 5 else '#ffeeba' if uv_index <= 7 else '#f8d7da' if uv_index <= 10 else '#f5c6cb'};">
-            {"<p style='color: #155724; font-weight: bold; margin: 0;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
-             "<p style='color: #856404; font-weight: bold; margin: 0;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
-             "<p style='color: #856404; font-weight: bold; margin: 0;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
-             "<p style='color: #721c24; font-weight: bold; margin: 0;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
-             "<p style='color: #491217; font-weight: bold; margin: 0;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
-        </div>
+    {"<p style='color: green;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
+     "<p style='color: yellow;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
+     "<p style='color: orange;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
+     "<p style='color: red;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
+     "<p style='color: purple;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
     </div>
     """,
     unsafe_allow_html=True,
