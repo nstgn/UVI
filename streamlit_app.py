@@ -122,15 +122,15 @@ st.markdown(
 # Streamlit Title
 st.markdown(
     """
-    <h1 style="text-align: center;">UV Index</h1>
+    <h1 style="text-align: center; margin-bottom: 10px;">UV Index</h1>
     """,
     unsafe_allow_html=True,
 )
 
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
-uv_index = latest_data['Index']  # Nilai Index
-
+#uv_index = latest_data['Index']  # Nilai Index
+uv_index = 7
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
@@ -152,15 +152,15 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
-    <div style="text-align: center; margin-top: 5px;">
-        <div style="display: inline-block; font-size: smaller; padding: 10px; 
+    <div style="text-align: center; margin-top: 2px;">
+        <span style="display: inline-block; padding: 5px 15px; border-radius: 5px;
                     background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
             {"<p style='color: #00ff00;'><strong>✅ Tingkat aman:</strong> Gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
              "<p style='color: #ffcc00;'><strong>⚠️ Tingkat bahaya sedang:</strong> Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
              "<p style='color: #ff6600;'><strong>⚠️ Tingkat bahaya tinggi:</strong> Kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
              "<p style='color: #ff0000;'><strong>⚠️ Tingkat bahaya sangat tinggi:</strong> Tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
              "<p style='color: #9900cc;'><strong>❗ Tingkat bahaya ekstrem:</strong> Diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
-        </div>
+       </span>
     </div>
     """,
     unsafe_allow_html=True,
@@ -309,7 +309,7 @@ st.markdown(
     .footer {
         position: fixed;
         bottom: 0;
-        left: 50px;
+        left: 70px;
         font-size: 12px;
         text-align: left;
         margin: 0;
