@@ -182,18 +182,32 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Tampilan grid prakiraan
+# Tampilan grid prakiraan        
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
     with cols[i]:
         uv_level = row["Predicted Index"]
-        icon, desc, bg_color = ("🟢", "Low", "#00ff00") if uv_level < 3 else \
-                               ("🟡", "Moderate", "#ffe600") if uv_level < 6 else \
-                               ("🟠", "High", "#ff8c00") if uv_level < 8 else \
-                               ("🔴", "Very High", "#ff0000") if uv_level < 11 else \
-                               ("🟣", "Extreme", "#9900cc")
-        
-
+        if uv_level < 3:
+            icon = "🟢"
+            desc = "Low"
+            bg_color = "#00ff00"
+        elif uv_level < 6:
+            icon = "🟡"
+            desc = "Moderate"
+            bg_color = "#ffcc00"
+        elif uv_level < 8:
+            icon = "🟠"
+            desc = "High"
+            bg_color = "#ff8c00"
+        elif uv_level < 11:
+            icon = "🔴"
+            desc = "Very High"
+            bg_color = "#ff0000"
+        else:
+            icon = "🟣"
+            desc = "Extreme"
+            bg_color = "#9900cc"
+            
 # Kustomisasi tampilan grid
 st.markdown(
     f"""
