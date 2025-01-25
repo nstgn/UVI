@@ -61,7 +61,7 @@ model = Sequential([
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 #9 Pelatihan Model
-history=model.fit(X_train, y_train, epochs=10, batch_size=8, validation_data=(X_test, y_test), verbose=1)
+history=model.fit(X_train, y_train, epochs=50, batch_size=8, validation_data=(X_test, y_test), verbose=1)
 
 #10 Prediksi Model
 train_predicted = model.predict(X_train)
@@ -187,29 +187,15 @@ cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
     with cols[i]:
         uv_level = row["Predicted Index"]
-        if uv_level < 3:
-            icon = "🟢"
-            desc = "Low"
-            bg_color = "#00ff00"
-        elif uv_level < 6:
-            icon = "🟡"
-            desc = "Moderate"
-            bg_color = "#ffe600"
-        elif uv_level < 8:
-            icon = "🟠"
-            desc = "High"
-            bg_color = "#ff8c00"
-        elif uv_level < 11:
-            icon = "🔴"
-            desc = "Very High"
-            bg_color = "#ff0000"
-        else:
-            icon = "🟣"
-            desc = "Extreme"
-            bg_color = "#9900cc"
+        icon, desc, bg_color = ("🟢", "Low", "#00ff00") if uv_level < 3 else \
+                               ("🟡", "Moderate", "#ffe600") if uv_level < 6 else \
+                               ("🟠", "High", "#ff8c00") if uv_level < 8 else \
+                               ("🔴", "Very High", "#ff0000") if uv_level < 11 else \
+                               ("🟣", "Extreme", "#9900cc")
+        
 
-        # Kustomisasi tampilan grid
-        st.markdown(
+# Kustomisasi tampilan grid
+  st.markdown(
             f"""
             <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
                 <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
