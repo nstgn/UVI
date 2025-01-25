@@ -130,8 +130,8 @@ st.markdown(
 
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
-uv_index = latest_data['Index']  # Nilai Index
-
+#uv_index = latest_data['Index']  # Nilai Index
+uv_index = 5
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
@@ -236,7 +236,7 @@ st.markdown(
             <th style="border: 1px solid black; padding: 8px;">Himbauan</th>
         </tr>
         <tr style="background-color: #00ff00;">
-            <td style="border: 1px solid black; padding: 8px; text-align: left;">(Low)</td>
+            <td style="border: 1px solid black; padding: 8px; text-align: left;">0-2 (Low)</td>
             <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
                     <li>Tingkat bahaya rendah bagi orang banyak.</li>
