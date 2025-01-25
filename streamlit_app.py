@@ -138,15 +138,19 @@ fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
     gauge={
-        'axis': {'range': [0, 11]},
-        'bar': {'color': "#9900cc"},
+        'axis': {'range': [0, 12]},  # Perluas range untuk UV Index 11+
+        'bar': {'color': "#9900cc"},  # Warna indikator utama
         'steps': [
-            {'range': [0, 3], 'color': "#00ff00"},
-            {'range': [3, 6], 'color': "#ffff00"},
-            {'range': [6, 8], 'color': "#ff6600"},
-            {'range': [8, 10], 'color': "#ff0000"},
-            {'range': [10,12], 'color': "#9900cc"},
-        ]
+            {'range': [0, 2], 'color': "#00ff00"},  # Hijau (aman)
+            {'range': [3, 5], 'color': "#ffff00"},  # Kuning (sedang)
+            {'range': [6, 7], 'color': "#ff6600"},  # Oranye (tinggi)
+            {'range': [8, 10], 'color': "#ff0000"}, # Merah (sangat tinggi)
+            {'range': [11, 12], 'color': "#9900cc"}, # Ungu (ekstrem, 11+)
+        ],
+        'threshold': {
+            'line': {'color': "#9900cc", 'width': 4},  # Garis penanda untuk UV Index ekstrem
+            'thickness': 0.75,
+        }
     }
 ))
 
