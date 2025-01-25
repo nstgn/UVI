@@ -229,14 +229,15 @@ st.markdown(
 
 st.markdown(
     """
-    <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+    <table style="width:100%; border-collapse: collapse; text-align: center;">
         <tr>
-            <th style="border: 1px solid black; padding: 10px; background-color: #f2f2f2;">Kategori</th>
-            <th style="border: 1px solid black; padding: 10px; background-color: #f2f2f2;">Himbauan</th>
+            <th style="border: 1px solid black; padding: 8px;">Kategori</th>
+            <th style="border: 1px solid black; padding: 8px;">Himbauan</th>
         </tr>
         <tr>
-            <td style="border: 1px solid black; padding: 10px;">Low (risiko bahaya rendah)</td>
-            <td style="border: 1px solid black; padding: 10px;">
+        <tr style="background-color: #00ff00;">
+            <td style="border: 1px solid black; padding: 8px;">(Low)</td>
+            <td style="border: 1px solid black; padding: 8px;">
                 <ul>
                     <li>Tingkat bahaya rendah bagi orang banyak.</li>
                     <li>Kenakan kacamata hitam pada hari yang cerah.</li>
@@ -246,44 +247,56 @@ st.markdown(
             </td>
         </tr>
         <tr>
-            <td style="border: 1px solid black; padding: 10px;">Moderate (risiko bahaya sedang)</td>
-            <td style="border: 1px solid black; padding: 10px;">
+        <tr style="background-color: #ffcc00;">
+            <td style="border: 1px solid black; padding: 8px;">3-5 (Moderate)</td>
+            <td style="border: 1px solid black; padding: 8px;">
                 <ul>
                     <li>Tingkat bahaya sedang bagi orang yang terpapar matahari tanpa pelindung.</li>
                     <li>Tetap di tempat teduh pada saat matahari terik siang hari.</li>
                     <li>Kenakan pakaian pelindung matahari, topi lebar, dan kacamata hitam yang menghalangi sinar UV, pada saat berada di luar ruangan.</li>
                     <li>Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam bahkan pada hari berawan, setelah berenang atau berkeringat.</li>
+                    <li>Permukaan yang cerah, seperti pasir, air, dan salju, akan meningkatkan paparan UV.</li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td style="border: 1px solid black; padding: 10px;">High (risiko bahaya tinggi)</td>
-            <td style="border: 1px solid black; padding: 10px;">
+        <tr style="background-color: #ff6600;">
+            <td style="border: 1px solid black; padding: 8px;">6-7 (High)</td>
+            <td style="border: 1px solid black; padding: 8px;">
                 <ul>
                     <li>Tingkat bahaya tinggi bagi orang yang terpapar matahari tanpa pelindung, diperlukan pelindung untuk menghindari kerusakan mata dan kulit.</li>
                     <li>Kurangi waktu di bawah paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</li>
                     <li>Kenakan pakaian pelindung matahari, topi lebar, dan kacamata hitam yang menghalangi sinar UV, pada saat berada di luar ruangan.</li>
                     <li>Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam bahkan pada hari berawan, setelah berenang atau berkeringat.</li>
+                    <li>Permukaan yang cerah, seperti pasir, air, dan salju, akan meningkatkan paparan UV.</li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td style="border: 1px solid black; padding: 10px;">Very High (risiko bahaya sangat tinggi)</td>
-            <td style="border: 1px solid black; padding: 10px;">
+        <tr style="background-color: #ff0000; color: white;">
+            <td style="border: 1px solid black; padding: 8px;">8-10 (Very High)</td>
+            <td style="border: 1px solid black; padding: 8px;">
                 <ul>
+                    <li>Tingkat bahaya tinggi bagi orang yang terpapar matahari tanpa pelindung, diperlukan pelindung untuk menghindari kerusakan mata dan kulit.</li>
                     <li>Minimal waktu di bawah paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</li>
                     <li>Tetap di tempat teduh pada saat matahari terik siang hari.</li>
                     <li>Kenakan pakaian pelindung matahari, topi lebar, dan kacamata hitam yang menghalangi sinar UV, pada saat berada di luar ruangan.</li>
                     <li>Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam bahkan pada hari berawan, setelah berenang atau berkeringat.</li>
+                    <li>Permukaan yang cerah, seperti pasir, air, dan salju, akan meningkatkan paparan UV.</li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td style="border: 1px solid black; padding: 10px;">Extreme (risiko bahaya ekstrem)</td>
-            <td style="border: 1px solid black; padding: 10px;">
+        <tr style="background-color: #9900cc; color: white;">
+            <td style="border: 1px solid black; padding: 8px;">11+ (Extreme)</td>
+            <td style="border: 1px solid black; padding: 8px;">
                 <ul>
                     <li>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</li>
                     <li>Hindari paparan matahari langsung dan pastikan perlindungan maksimal.</li>
+                    <li>Tetap di tempat teduh pada saat matahari terik siang hari.</li>
+                    <li>Kenakan pakaian pelindung matahari, topi lebar, dan kacamata hitam yang menghalangi sinar UV, pada saat berada di luar ruangan.</li>
+                    <li>Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam bahkan pada hari berawan, setelah berenang atau berkeringat.</li>
+                    <li>Permukaan yang cerah, seperti pasir, air, dan salju, akan meningkatkan paparan UV.</li>
                 </ul>
             </td>
         </tr>
