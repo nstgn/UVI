@@ -131,26 +131,22 @@ st.markdown(
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
-uv_index = 10
+uv_index = 11
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
     gauge={
-        'axis': {'range': [0, 12]},  # Perluas range untuk UV Index 11+
-        'bar': {'color': "#9900cc"},  # Warna indikator utama
+        'axis': {'range': [0, 11]},
+        'bar': {'color': "#9900cc"},
         'steps': [
-            {'range': [0, 2], 'color': "#00ff00"},  # Hijau (aman)
-            {'range': [2, 5], 'color': "#ffff00"},  # Kuning (sedang)
-            {'range': [5, 7], 'color': "#ff6600"},  # Oranye (tinggi)
-            {'range': [7, 10], 'color': "#ff0000"}, # Merah (sangat tinggi)
-            {'range': [10, 12], 'color': "#9900cc"}, # Ungu (ekstrem, 11+)
-        ],
-        'threshold': {
-            'line': {'color': "#9900cc", 'width': 4},  # Garis penanda untuk UV Index ekstrem
-            'thickness': 0.75,
-        }
+            {'range': [0, 3], 'color': "#00ff00"},
+            {'range': [3, 6], 'color': "#ffff00"},
+            {'range': [6, 8], 'color': "#ff6600"},
+            {'range': [8, 10], 'color': "#ff0000"},
+            {'range': [10,11], 'color': "#9900cc"},
+        ]
     }
 ))
 
