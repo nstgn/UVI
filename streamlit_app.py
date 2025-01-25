@@ -143,7 +143,7 @@ fig = go.Figure(go.Indicator(
         'steps': [
             {'range': [0, 3], 'color': "#00ff00"},
             #{'range': [3, 6], 'color': "#ffcc00"}, 
-            {'range': [3, 6], 'color': "#e3d912"},
+            {'range': [3, 6], 'color': "#ffff00"},
             {'range': [6, 8], 'color': "#ff6600"},
             {'range': [8, 10], 'color': "#ff0000"},
             {'range': [10,11], 'color': "#9900cc"},
@@ -155,17 +155,18 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
-    <div style="text-align: center; margin-top: -20px; font-size: smaller; border: 1px solid #ccc; border-radius: 10px; padding: 10px; background-color: {'#d4edda' if uv_index <= 2 else '#fff3cd' if uv_index <= 5 else '#ffeeba' if uv_index <= 7 else '#f8d7da' if uv_index <= 10 else '#f5c6cb'};">
-    {"<p style='color: black; font-weight: bold; margin: 0;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
-     "<p style='color: black; font-weight: bold; margin: 0;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
-     "<p style='color: black; font-weight: bold; margin: 0;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
-     "<p style='color: white; font-weight: bold; text-shadow: 1px 1px 2px black; margin: 0;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
-     "<p style='color: white; font-weight: bold; text-shadow: 1px 1px 2px black; margin: 0;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
+    <div style="text-align: center; margin-top: -20px;">
+        <div style="display: inline-block; font-size: smaller; border: 1px solid #ccc; border-radius: 10px; padding: 10px 20px; background-color: {'#d4edda' if uv_index <= 2 else '#fff3cd' if uv_index <= 5 else '#ffeeba' if uv_index <= 7 else '#f8d7da' if uv_index <= 10 else '#f5c6cb'};">
+        {"<p style='color: black; font-weight: bold; margin: 0;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
+         "<p style='color: black; font-weight: bold; margin: 0;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
+         "<p style='color: black; font-weight: bold; margin: 0;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
+         "<p style='color: white; font-weight: bold; text-shadow: 1px 1px 2px black; margin: 0;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
+         "<p style='color: white; font-weight: bold; text-shadow: 1px 1px 2px black; margin: 0;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
-
 
 # Menambahkan widget waktu
 st.markdown(
@@ -249,7 +250,7 @@ st.markdown(
                 </ul>
             </td>
         </tr>
-        <tr style="background-color: #ffcc00;">
+        <tr style="background-color: #ffff00;">
             <td style="border: 1px solid black; padding: 8px; text-align: left;">3-5 (Moderate)</td>
             <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
@@ -273,7 +274,7 @@ st.markdown(
                 </ul>
             </td>
         </tr>
-        <tr style="background-color: #ff0000; color: white;">
+        <tr style="background-color: #ff0000;">
             <td style="border: 1px solid black; padding: 8px; text-align: left;">8-10 (Very High)</td>
             <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
@@ -286,7 +287,7 @@ st.markdown(
                 </ul>
             </td>
         </tr>
-        <tr style="background-color: #9900cc; color: white;">
+        <tr style="background-color: #9900cc;">
             <td style="border: 1px solid black; padding: 8px; text-align: left;">11+ (Extreme)</td>
             <td style="border: 1px solid black; padding: 8px; text-align: left;">
                 <ul>
