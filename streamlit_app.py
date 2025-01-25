@@ -132,19 +132,20 @@ latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
 uv_index = 5
+
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
     gauge={
         'axis': {'range': [0, 11]},
-        'bar': {'color': "light red"},
+        'bar': {'color': "#9184bd"},
         'steps': [
-            {'range': [0, 3], 'color': "green"},
-            {'range': [3, 6], 'color': "yellow"},
-            {'range': [6, 8], 'color': "orange"},
-            {'range': [8, 10], 'color': "red"},
-            {'range': [10,11], 'color': "purple"},
+            {'range': [0, 3], 'color': "#00ff00"},
+            {'range': [3, 6], 'color': "#ffcc00"},
+            {'range': [6, 8], 'color': "#ff6600"},
+            {'range': [8, 10], 'color': "#ff0000"},
+            {'range': [10,11], 'color': "#9900cc"},
         ]
     }
 ))
