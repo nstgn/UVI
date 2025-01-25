@@ -157,7 +157,7 @@ st.markdown(
         <div style="display: inline-block; font-size: smaller; border-radius: 8px; padding: 10px 15px; 
                     background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
     {"<p style='color: #00ff00;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
-     "<p style='color: #ffff00;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
+     "<p style='color: #ffcc00;'>Tingkat bahaya sedang, oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
      "<p style='color: #ff6600;'>Tingkat bahaya tinggi, kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
      "<p style='color: #ff0000;'>Tingkat bahaya sangat tinggi, tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
      "<p style='color: #9900cc;'>Tingkat bahaya ekstrem, diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
@@ -198,11 +198,11 @@ for i, row in future_df.iterrows():
         elif uv_level < 6:
             icon = "🟡"
             desc = "Moderate"
-            bg_color = "#ffcc00"
+            bg_color = "#ffe600"
         elif uv_level < 8:
             icon = "🟠"
             desc = "High"
-            bg_color = "#ff6600"
+            bg_color = "#ff8c00"
         elif uv_level < 11:
             icon = "🔴"
             desc = "Very High"
