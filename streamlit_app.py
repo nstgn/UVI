@@ -131,7 +131,7 @@ st.markdown(
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
-uv_index = 9
+uv_index = 10
 
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
@@ -154,7 +154,7 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
-    <div style="text-align: center; margin-top: -20px;">
+    <div style="text-align: center; margin-top: 20px;">
         <div style="display: inline-block; font-size: smaller; border: 1px solid #ddd; border-radius: 8px; padding: 10px 15px; 
                     background-color: {'#d4edda' if uv_index <= 2 else '#fff3cd' if uv_index <= 5 else '#ffeeba' if uv_index <= 7 else '#f8d7da' if uv_index <= 10 else '#f5c6cb'};">
     {"<p style='color: green;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
@@ -170,7 +170,7 @@ st.markdown(
 # Menambahkan widget waktu
 st.markdown(
     f"""
-    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 30px;">
+    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 50px;">
         <p><b>Waktu:</b> {latest_time.strftime('%H:%M')}</p>
     </div>
     """,
@@ -232,7 +232,7 @@ for i, row in future_df.iterrows():
 # Menambahkan tabel saran proteksi
 st.markdown(
     """
-    <h1 style="text-align: center;margin-top: 30px; margin-bottom: 10px;">Tabel Saran Proteksi</h1>
+    <h1 style="text-align: center;margin-top: 50px; margin-bottom: 10px;">Tabel Saran Proteksi</h1>
     """,
     unsafe_allow_html=True,
 )
