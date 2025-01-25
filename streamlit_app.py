@@ -61,7 +61,7 @@ model = Sequential([
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 #9 Pelatihan Model
-history=model.fit(X_train, y_train, epochs=100, batch_size=8, validation_data=(X_test, y_test), verbose=1)
+history=model.fit(X_train, y_train, epochs=10, batch_size=8, validation_data=(X_test, y_test), verbose=1)
 
 #10 Prediksi Model
 train_predicted = model.predict(X_train)
@@ -137,7 +137,7 @@ fig = go.Figure(go.Indicator(
     value=uv_index,
     gauge={
         'axis': {'range': [0, 11]},
-        'bar': {'color': "#9900cc"},
+        'bar': {'color': "#3098ff"},
         'steps': [
             {'range': [0, 3], 'color': "#00ff00"},
             {'range': [3, 6], 'color': "#ffff00"},
@@ -152,7 +152,7 @@ fig = go.Figure(go.Indicator(
 st.plotly_chart(fig, use_container_width=True)
 st.markdown(
     f"""
-    <div style="text-align: center; margin-top: 10px;">
+    <div style="text-align: center; margin-top: 5px;">
         <div style="display: inline-block; font-size: smaller; border-radius: 8px; padding: 10px 15px; 
                     background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
     {"<p style='color: #00ff00;'>Tingkat aman, gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
