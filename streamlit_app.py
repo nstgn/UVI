@@ -130,7 +130,7 @@ st.markdown(
 latest_data = data.iloc[-1]  # Data terbaru
 latest_time = latest_data.name  # Waktu dari indeks
 #uv_index = latest_data['Index']  # Nilai Index
-uv_index = 9
+uv_index = 11
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
