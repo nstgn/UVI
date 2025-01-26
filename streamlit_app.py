@@ -70,11 +70,9 @@ test_predicted = model.predict(X_test)
 last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
-if minute_offset < 15:
-  last_time -= pd.Timedelta(minutes=minute_offset)
-else:
-  last_time += pd.Timedelta(minutes=(30 - minute_offset))
-time_interval = pd.Timedelta(minutes=30)
+if minute_offset != 0:
+    last_time += pd.Timedelta(minutes=(30 - minute_offset))
+
 
 # Prediksi ke depan
 future_steps = 10
