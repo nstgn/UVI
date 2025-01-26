@@ -73,6 +73,8 @@ minute_offset = last_time.minute % 30
 if minute_offset != 0:
     last_time += pd.Timedelta(minutes=(30 - minute_offset))
 
+# Interval waktu 30 menit
+time_interval = pd.Timedelta(minutes=30)
 
 # Prediksi ke depan
 future_steps = 10
