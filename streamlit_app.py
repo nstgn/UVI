@@ -105,8 +105,7 @@ st.markdown(
         background-color: #D6D6F5;
         padding: 10px;
         text-align: center;
-        justify-content: center;
-        border-radius: 5px;
+        border-radius: 7px;
     }
     .header img {
         width: 60px;
@@ -170,7 +169,7 @@ st.markdown(
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
-        <p><b>Waktu:</b> {latest_time.strftime('%H:%M')}</p>
+        <p><b>Pukul:</b> {latest_time.strftime('%H:%M')}</p>
     </div>
     """,
     unsafe_allow_html=True,
