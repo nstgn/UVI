@@ -194,11 +194,11 @@ for i, row in future_df.iterrows():
         elif uv_level < 6:
             icon = "🟡"
             desc = "Moderate"
-            bg_color = "#ffe600"
+            bg_color = "#ffcc00"
         elif uv_level < 8:
             icon = "🟠"
             desc = "High"
-            bg_color = "#ff8c00"
+            bg_color = "#ff6600"
         elif uv_level < 11:
             icon = "🔴"
             desc = "Very High"
@@ -208,17 +208,17 @@ for i, row in future_df.iterrows():
             desc = "Extreme"
             bg_color = "#9900cc"
 
- # Kustomisasi tampilan grid
-st.markdown(
-    f"""
-    <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
-        <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
-        <h2 style="color:white;">{icon} {uv_level}</h2>
-        <p style="color:white;">{desc}</p>
-    </div>
-     """,
-     unsafe_allow_html=True,
- )
+        # Kustomisasi tampilan grid
+        st.markdown(
+            f"""
+            <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
+                <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
+                <h2 style="color:white;">{icon} {uv_level}</h2>
+                <p style="color:white;">{desc}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 # Menambahkan tabel saran proteksi
 st.markdown(
