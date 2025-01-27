@@ -209,16 +209,16 @@ for i, row in future_df.iterrows():
             bg_color = "#9900cc"
 
 # Kustomisasi tampilan grid
-st.markdown(
-    f"""
-    <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
-         <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
-         <h2 style="color:white;">{icon} {uv_level}</h2>
-         <p style="color:white;">{desc}</p>
-    </div>
-     """,
-     unsafe_allow_html=True,
- )
+        st.markdown(
+            f"""
+            <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
+                <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
+                <h2 style="color:white;">{icon} {uv_level}</h2>
+                <p style="color:white;">{desc}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 # Menambahkan tabel saran proteksi
 st.markdown(
