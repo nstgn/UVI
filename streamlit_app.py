@@ -209,7 +209,7 @@ for i, row in future_df.iterrows():
             bg_color = "#9900cc"
 
 # Kustomisasi tampilan grid
-  st.markdown(
+st.markdown(
     f"""
     <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
          <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
