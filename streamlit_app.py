@@ -11,6 +11,7 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import plotly.graph_objects as go
 
+#url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 url = "https://docs.google.com/spreadsheets/d/1XPGPw08xkov3ly_BgamdInZUcSONPGbDSm0pOJ2ZJbw/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 
@@ -69,8 +70,10 @@ test_predicted = model.predict(X_test)
 last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
-if minute_offset != 0:
-    last_time += pd.Timedelta(minutes=(30 - minute_offset))
+if minute_offset < 15:
+  last_time -= pd.Timedelta(minutes=minute_offset)
+else:
+  last_time += pd.Timedelta(minutes=(30 - minute_offset))
 
 # Interval waktu 30 menit
 time_interval = pd.Timedelta(minutes=30)
@@ -95,7 +98,6 @@ future_df = pd.DataFrame({
 })
 
 future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
-
 
 # Custom Header
 st.markdown(
@@ -208,7 +210,7 @@ for i, row in future_df.iterrows():
             desc = "Extreme"
             bg_color = "#9900cc"
 
-# Kustomisasi tampilan grid
+  # Kustomisasi tampilan grid
         st.markdown(
             f"""
             <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
