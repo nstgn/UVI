@@ -126,7 +126,7 @@ st.markdown(
 # Streamlit Title
 st.markdown(
     """
-    <h1 style="text-align: center;margin-top: 40px; margin-bottom: 10px;">UV Index</h1>
+    <h1 style="text-align: center;margin-top: 10px; margin-bottom: -30px;">UV Index</h1>
     """,
     unsafe_allow_html=True,
 )
