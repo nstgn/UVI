@@ -71,6 +71,7 @@ history=model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(
 train_predicted = model.predict(X_train)
 test_predicted = model.predict(X_test)
 
+# Atur waktu awal ke interval 30 menit terdekat
 last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
@@ -84,7 +85,7 @@ time_interval = pd.Timedelta(minutes=30)
 
 # Prediksi ke depan
 future_steps = 10
-last_sequence = X_test[-1]
+last_sequence = X_test[-1]  # Ambil urutan terakhir dari data test
 future_predictions = []
 future_times = [last_time + i * time_interval for i in range(1, future_steps + 1)]
 
