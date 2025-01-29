@@ -138,7 +138,7 @@ uv_index = latest_data['Index']
 # Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
-    value=uv_index,
+    value=uv_index,margin-top: 10px;
     gauge={
         'axis': {'range': [0, 11]},
         'bar': {'color': "#3098ff"},
