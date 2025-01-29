@@ -85,7 +85,7 @@ time_interval = pd.Timedelta(minutes=30)
 
 # Prediksi ke depan
 future_steps = 10
-last_sequence = X_test[-1]  # Ambil urutan terakhir dari data test
+last_sequence = X_test[-1]  
 future_predictions = []
 future_times = [last_time + i * time_interval for i in range(1, future_steps + 1)]
 
