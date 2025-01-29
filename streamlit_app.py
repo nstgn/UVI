@@ -152,7 +152,7 @@ fig = go.Figure(go.Indicator(
     }
 ))
 fig.update_layout(
-    margin=dict(t=20, b=20, l=20, r=20),  # Mengurangi margin
+    margin=dict(t=30, b=30, l=30, r=30),  # Mengurangi margin
     height=250  # Menyesuaikan tinggi chart agar tidak terlalu besar
 )
 # Menampilkan widget
