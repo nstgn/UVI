@@ -21,8 +21,12 @@ data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
 #3 Pre-Processing Data
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
 data.set_index('Datetime', inplace=True)
-data = data[['Index']]
-data = data.resample('2T').mean()
+data = data[['Index']].copy()
+
+date_range = pd.date_range(start=data.index.min(), end=data.index.max(), freq='2T')
+date_range = date_range[(date_range.hour >= 6) & (date_range.hour <= 18)]
+
+data = data.reindex(date_range)
 data['Index'].interpolate(method='linear', inplace=True)
 
 #4 Normalisasi Data
