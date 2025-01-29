@@ -126,7 +126,7 @@ st.markdown(
 # Streamlit Title
 st.markdown(
     """
-    <h1 style="text-align: center;margin-top: 10px; margin-bottom: -30px;">UV Index</h1>
+    <h1 style="text-align: center;">UV Index</h1>
     """,
     unsafe_allow_html=True,
 )
@@ -151,9 +151,14 @@ fig = go.Figure(go.Indicator(
         ]
     }
 ))
-
+fig.update_layout(
+    margin=dict(t=10, b=10, l=10, r=10),  # Mengurangi margin
+    height=250  # Menyesuaikan tinggi chart agar tidak terlalu besar
+)
 # Menampilkan widget
 st.plotly_chart(fig, use_container_width=True)
+
+
 st.markdown(
     f"""
     <div style="text-align: center;">
