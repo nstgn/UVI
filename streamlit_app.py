@@ -124,12 +124,19 @@ st.markdown(
 )
 
 # Streamlit Title
+#st.markdown(
+    #"""
+    #<h1 style="text-align: center; ">UV Index</h1>
+   # """,
+    #unsafe_allow_html=True,
+#)
 st.markdown(
     """
-    <h1 style="text-align: center; ">UV Index</h1>
+    <h1 style="text-align: center; margin-bottom: 5px;">UV Index</h1>
     """,
     unsafe_allow_html=True,
 )
+
 
 latest_data = data.iloc[-1] 
 latest_time = latest_data.name 
