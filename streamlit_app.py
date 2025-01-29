@@ -101,8 +101,6 @@ future_df = pd.DataFrame({
     'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
 })
 
-future_df = future_df[(future_df['Time'].dt.hour >= 6) & (future_df['Time'].dt.hour <= 18)]
-
 # Custom Header
 st.markdown(
     """
