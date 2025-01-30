@@ -197,7 +197,7 @@ cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
     with cols[i]:
         #uv_level = row["Predicted Index"]
-        uv_level = row[["0", "1", "2", "3", "4", "5", "6", "7", "9", "11"]].idxmax()
+        uv_level = row[["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]].idxmax()
 
         # Konversi ke integer
         uv_level = int(uv_level)
