@@ -24,8 +24,8 @@ st.markdown(
 latest_time = datetime.strptime("08:00", "%H:%M")
 
 future_df = pd.DataFrame({
-    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(10)],
-    "Predicted Index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 11]  # Data prediksi diperbarui
+    "Time": [latest_time + timedelta(minutes=30 * i) for i in range(10)],
+    "Predicted Index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 11]
 })
 
 # Tampilan grid prakiraan
