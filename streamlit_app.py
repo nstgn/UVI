@@ -1,7 +1,15 @@
-import streamlit as st
-import datetime
+#1 Import Library
+import numpy as np
 import pandas as pd
-import plotly.express as px
+import tensorflow as tf
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import streamlit as st
+from streamlit_gsheets import GSheetsConnection
+import plotly.graph_objects as go
 
 # Custom Header
 st.markdown(
@@ -24,14 +32,19 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Judul Aplikasi
-st.title("UV Index Monitor")
+# Streamlit Title
+st.markdown(
+    """
+    <h1 style="text-align: center;">UV Index</h1>
+    """,
+    unsafe_allow_html=True,
+)
 
-# Simulasi Data Dummy
-latest_time = datetime.datetime.now()
-uv_index = 5  # Nilai UV Index tetap (bisa diubah sesuai keinginan)
+# Membuat gauge chart
+latest_data = data.iloc[-1] 
+latest_time = latest_data.name 
+uv_index = latest_data['Index'] 
 
-# Gauge Chart untuk UV Index
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
@@ -54,15 +67,6 @@ fig.update_layout(
 
 st.plotly_chart(fig, use_container_width=True)
 
-# Simulasi Data Prediksi Dummy
-future_df = pd.DataFrame({
-    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(5)],
-    "Predicted Index": [4, 6, 8, 9, 11]  # Data dummy
-})
-
-# Menampilkan UV Index saat ini
-st.metric(label="Current UV Index", value=uv_index)
-
 # Menambahkan widget himbauan
 st.markdown(
     f"""
@@ -80,15 +84,15 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-# Simulasi Data Prediksi Dummy
-future_df = pd.DataFrame({
-    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(5)],
-    "Predicted Index": [4, 6, 8, 9, 11]  
-})
-
-# Menampilkan UV Index saat ini
-st.metric(label="Current UV Index", value=uv_index)
+# Menambahkan widget waktu
+st.markdown(
+    f"""
+    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
+        <p><b>Pukul:</b> {latest_time.strftime('%H:%M')}</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.markdown(
     """
@@ -133,34 +137,6 @@ for i, row in future_df.iterrows():
             """,
             unsafe_allow_html=True,
         )
-
-# Kotak indikator UV
-st.markdown(
-    f"""
-    <div style="padding: 20px; text-align: center; background-color: {get_uv_color(uv_index)}; color: white; font-size: 24px; border-radius: 10px;">
-        UV Index: {uv_index}
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-# Grafik Prediksi UV Index
-fig = px.line(future_df, x="Time", y="Predicted Index", markers=True, title="Predicted UV Index")
-st.plotly_chart(fig)
-
-# Catatan Keselamatan Berdasarkan UV Index
-if uv_index <= 2:
-    st.success("UV rendah. Aman untuk aktivitas luar ruangan.")
-elif uv_index <= 5:
-    st.warning("UV sedang. Gunakan topi dan kacamata hitam.")
-elif uv_index <= 7:
-    st.warning("UV tinggi. Pakai sunscreen dan cari tempat teduh.")
-elif uv_index <= 10:
-    st.error("UV sangat tinggi. Hindari terlalu lama di bawah matahari!")
-else:
-    st.error("UV ekstrem! Batasi waktu di luar ruangan sebisa mungkin.")
-
-# Jalankan dengan: streamlit run streamlit_app.py
 
 # Menambahkan tabel saran proteksi
 st.markdown(
