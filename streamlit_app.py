@@ -1,3 +1,17 @@
+#1 Import Library
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import streamlit as st
+from streamlit_gsheets import GSheetsConnection
+import plotly.graph_objects as go
+
+
 st.markdown(
     """
     <h1 style="text-align: center;">UV Index Prediction</h1>
