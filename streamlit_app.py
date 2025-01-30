@@ -140,7 +140,6 @@ uv_index = 2
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
-    margin=dict(t=30, b=30, l=30, r=30),
     gauge={
         'axis': {'range': [0, 11]},
         'bar': {'color': "#3098ff"},
@@ -153,9 +152,9 @@ fig = go.Figure(go.Indicator(
         ]
     }
 ))
-#fig.update_layout(
-   
-#)
+fig.update_layout(
+    margin=dict(t=30, b=30, l=30, r=30),
+)
 # Menampilkan widget
 st.plotly_chart(fig, use_container_width=True)
 
