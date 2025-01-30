@@ -31,6 +31,7 @@ st.title("UV Index Monitor")
 latest_time = datetime.datetime.now()
 uv_index = 5  # Nilai UV Index tetap (bisa diubah sesuai keinginan)
 
+# Gauge Chart untuk UV Index
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
