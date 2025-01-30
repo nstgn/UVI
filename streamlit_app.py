@@ -41,7 +41,7 @@ st.markdown(
 )
 
 # Membuat gauge chart
-latest_time = datetime.datetime.now()
+latest_time = 08.00
 uv_index = 5 
 
 fig = go.Figure(go.Indicator(
