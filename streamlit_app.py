@@ -148,7 +148,7 @@ for i, row in future_df.iterrows():
 # Menambahkan tabel saran proteksi
 st.markdown(
     """
-    <h1 style="text-align: center;margin-top: 40px; margin-bottom: 10px;">Tabel Saran Proteksi</h1>
+    <h1 style="text-align: center;margin-top: 20px; margin-bottom: 10px;">Tabel Saran Proteksi</h1>
     """,
     unsafe_allow_html=True,
 )
