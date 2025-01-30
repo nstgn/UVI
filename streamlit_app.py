@@ -97,11 +97,14 @@ for _ in range(future_steps):
 
 # Inversi normalisasi dan bulatkan prediksi
 future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
-future_df = pd.DataFrame({
-    'Time': future_times,
+#future_df = pd.DataFrame({
+    #'Time': future_times,
     #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
+future_data = {
+    "Time": pd.date_range("2025-01-30 08:00", periods=5, freq="H"),
     'Predicted Index': [0,1,2,3,4,5,6,7,8,9,11]
-})
+}
+#})
 
 # Custom Header
 st.markdown(
