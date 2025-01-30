@@ -100,11 +100,11 @@ future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions
 #future_df = pd.DataFrame({
     #'Time': future_times,
     #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
-future_data = {
-    "Time": pd.date_range("2025-01-30 08:00", periods=5, freq="H"),
+future_df = pd.DataFrame({
+    "Time": pd.date_range("2025-01-30 08:30", periods=5, freq="H").strftime('%H:%M'),
     'Predicted Index': [0,1,2,3,4,5,6,7,8,9,11]
-}
-#})
+
+})
 
 # Custom Header
 st.markdown(
@@ -158,7 +158,7 @@ fig = go.Figure(go.Indicator(
 ))
 fig.update_layout(
     margin=dict(t=30, b=30, l=30, r=30),  # Mengurangi margin
-    #height=250  # Menyesuaikan tinggi chart agar tidak terlalu besar
+    height=200  # Menyesuaikan tinggi chart agar tidak terlalu besar
 )
 # Menampilkan widget
 st.plotly_chart(fig, use_container_width=True)
