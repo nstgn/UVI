@@ -3,12 +3,78 @@ import datetime
 import pandas as pd
 import plotly.express as px
 
-# Judul Aplikasi
-st.title("UV Index Monitor")
+# Custom Header
+st.markdown(
+    """
+    <style>
+    .header {
+        background-color: #D6D6F5;
+        padding: 10px;
+        text-align: center;
+        border-radius: 7px;
+    }
+    .header img {
+        width: 60px;
+    }
+    </style>
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Streamlit Title
+st.markdown(
+    """
+    <h1 style="text-align: center;">UV Index</h1>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Simulasi Data Dummy
 latest_time = datetime.datetime.now()
 uv_index = 5  # Nilai UV Index tetap (bisa diubah sesuai keinginan)
+
+fig = go.Figure(go.Indicator(
+    mode="gauge+number",
+    value=uv_index,
+    gauge={
+        'axis': {'range': [0, 11]},
+        'bar': {'color': "#3098ff"},
+        'steps': [
+            {'range': [0, 3], 'color': "#00ff00"},
+            {'range': [3, 6], 'color': "#ffff00"},
+            {'range': [6, 8], 'color': "#ff6600"},
+            {'range': [8, 10], 'color': "#ff0000"},
+            {'range': [10,11], 'color': "#9900cc"},
+        ]
+    }
+))
+
+fig.update_layout(
+    margin=dict(t=30, b=30, l=30, r=30),
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# Menambahkan widget himbauan
+st.markdown(
+    f"""
+    <div style="text-align: center;">
+        <span style="display: inline-block; padding: 5px 15px; border-radius: 5px;
+                    background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
+            {"<p style='color: #00ff00;'><strong>✅ Tingkat aman:</strong> Gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
+             "<p style='color: #ffcc00;'><strong>⚠️ Tingkat bahaya sedang:</strong> Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
+             "<p style='color: #ff6600;'><strong>⚠️ Tingkat bahaya tinggi:</strong> Kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
+             "<p style='color: #ff0000;'><strong>⚠️ Tingkat bahaya sangat tinggi:</strong> Tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
+             "<p style='color: #9900cc;'><strong>❗ Tingkat bahaya ekstrem:</strong> Diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
+       </span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 # Simulasi Data Prediksi Dummy
 future_df = pd.DataFrame({
