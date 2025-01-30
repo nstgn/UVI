@@ -99,7 +99,7 @@ for _ in range(future_steps):
 future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
 future_df = pd.DataFrame({
     'Time': future_times,
-    'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
+    #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
 })
 
 # Custom Header
@@ -191,6 +191,23 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+
+# Buat DataFrame manual dengan berbagai nilai UV Index
+manual_data = [
+    {"Time": "08:30", "Predicted Index": 1},
+    {"Time": "09:00", "Predicted Index": 1},
+    {"Time": "09:30", "Predicted Index": 2},
+    {"Time": "10:00", "Predicted Index": 3},
+    {"Time": "10:30", "Predicted Index": 5},
+    {"Time": "11:00", "Predicted Index": 6},
+    {"Time": "11:30", "Predicted Index": 7},
+    {"Time": "12:00", "Predicted Index": 8},
+    {"Time": "12:30", "Predicted Index": 10},
+    {"Time": "13:00", "Predicted Index": 11},
+]
+
+future_df = pd.DataFrame(manual_data)
 
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
