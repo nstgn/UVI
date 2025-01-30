@@ -100,12 +100,20 @@ future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions
 #future_df = pd.DataFrame({
     #'Time': future_times,
     #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
-future_df = pd.DataFrame({
-    "Time": pd.date_range("2025-01-30 08:30", periods=10, freq="30min").strftime('%H:%M'),
-    'Predicted Index': [0,1,2,3,4,5,6,7,8,11]
 
-})
 
+# Buat data prediksi manual dengan jumlah yang sama
+times = pd.date_range("2025-01-30 08:30", periods=10, freq="30min").strftime('%H:%M').tolist()
+uv_predictions = [0,1,2,3,4,5,6,7,8,11]  # Harus sama panjang dengan times
+
+# Pastikan panjangnya sama
+assert len(times) == len(uv_predictions), "Jumlah waktu dan prediksi UV Index harus sama!"
+
+# Buat DataFrame
+future_df = pd.DataFrame({"Time": times, "Predicted Index": uv_predictions}
+
+
+                         
 # Custom Header
 st.markdown(
     """
@@ -144,6 +152,7 @@ uv_index = 2
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
+    margin=dict(t=30, b=30, l=30, r=30),
     gauge={
         'axis': {'range': [0, 11]},
         'bar': {'color': "#3098ff"},
@@ -156,10 +165,9 @@ fig = go.Figure(go.Indicator(
         ]
     }
 ))
-fig.update_layout(
-    margin=dict(t=30, b=30, l=30, r=30),  # Mengurangi margin
-    height=200  # Menyesuaikan tinggi chart agar tidak terlalu besar
-)
+#fig.update_layout(
+   
+#)
 # Menampilkan widget
 st.plotly_chart(fig, use_container_width=True)
 
