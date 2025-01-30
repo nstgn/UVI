@@ -5,6 +5,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+future_df = pd.DataFrame({
+    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(10)],
+    "Predicted Index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 11]  # Data prediksi diperbarui
+})
+
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
