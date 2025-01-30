@@ -41,7 +41,7 @@ st.markdown(
 )
 
 # Membuat gauge chart
-latest_time = 08:00
+latest_time = datetime.datetime.strptime("08:00", "%H:%M")
 uv_index = 2 
 
 fig = go.Figure(go.Indicator(
@@ -87,7 +87,7 @@ st.markdown(
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
-        <p><b>Pukul:</b> {08:00}</p>
+        <p><b>Pukul:</b> {latest_time.strftime('%H:%M')}</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -100,9 +100,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Data Prediksi UV Index
 future_df = pd.DataFrame({
-    "Time": [08:00 + pd.Timedelta(minutes=30 * i) for i in range(5)],
-    "Predicted Index": [4, 6, 8, 9, 11]  # Data dummy
+    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(10)],
+    "Predicted Index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 11]  # Data prediksi diperbarui
 })
 
 # Tampilan grid prakiraan
