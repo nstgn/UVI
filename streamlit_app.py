@@ -24,13 +24,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Streamlit Title
-st.markdown(
-    """
-    <h1 style="text-align: center;">UV Index</h1>
-    """,
-    unsafe_allow_html=True,
-)
+# Judul Aplikasi
+st.title("UV Index Monitor")
 
 # Simulasi Data Dummy
 latest_time = datetime.datetime.now()
@@ -57,6 +52,15 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
+# Simulasi Data Prediksi Dummy
+future_df = pd.DataFrame({
+    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(5)],
+    "Predicted Index": [4, 6, 8, 9, 11]  # Data dummy
+})
+
+# Menampilkan UV Index saat ini
+st.metric(label="Current UV Index", value=uv_index)
 
 # Menambahkan widget himbauan
 st.markdown(
