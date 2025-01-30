@@ -12,7 +12,6 @@ from streamlit_gsheets import GSheetsConnection
 import plotly.graph_objects as go
 
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
-#url = "https://docs.google.com/spreadsheets/d/1XPGPw08xkov3ly_BgamdInZUcSONPGbDSm0pOJ2ZJbw/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 #data = conn.read(worksheet="Sheet1")
@@ -71,7 +70,7 @@ history=model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(
 train_predicted = model.predict(X_train)
 test_predicted = model.predict(X_test)
 
-# Atur waktu awal ke interval 30 menit terdekat
+# Atur waktu prediksi
 last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
@@ -80,7 +79,6 @@ if minute_offset < 15:
 else:
   last_time += pd.Timedelta(minutes=(30 - minute_offset))
 
-# Interval waktu 30 menit
 time_interval = pd.Timedelta(minutes=30)
 
 # Prediksi ke depan
@@ -99,7 +97,7 @@ for _ in range(future_steps):
 future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
 future_df = pd.DataFrame({
     'Time': future_times,
-    #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
+    'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
 })
 
 # Custom Header
@@ -131,12 +129,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Membuat gauge chart
 latest_data = data.iloc[-1] 
 latest_time = latest_data.name 
-#uv_index = latest_data['Index'] 
-uv_index = 2
+uv_index = latest_data['Index'] 
 
-# Membuat gauge chart
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
     value=uv_index,
@@ -152,13 +149,14 @@ fig = go.Figure(go.Indicator(
         ]
     }
 ))
+
 fig.update_layout(
     margin=dict(t=30, b=30, l=30, r=30),
 )
-# Menampilkan widget
+
 st.plotly_chart(fig, use_container_width=True)
 
-
+# Menambahkan widget himbauan
 st.markdown(
     f"""
     <div style="text-align: center;">
@@ -192,23 +190,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-# Buat DataFrame manual dengan berbagai nilai UV Index
-manual_data = [
-    {"Time": "08:30", "Predicted Index": 1},
-    {"Time": "09:00", "Predicted Index": 1},
-    {"Time": "09:30", "Predicted Index": 2},
-    {"Time": "10:00", "Predicted Index": 3},
-    {"Time": "10:30", "Predicted Index": 5},
-    {"Time": "11:00", "Predicted Index": 6},
-    {"Time": "11:30", "Predicted Index": 7},
-    {"Time": "12:00", "Predicted Index": 8},
-    {"Time": "12:30", "Predicted Index": 10},
-    {"Time": "13:00", "Predicted Index": 11},
-]
-
-future_df = pd.DataFrame(manual_data)
-
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
@@ -235,7 +216,6 @@ for i, row in future_df.iterrows():
             desc = "Extreme"
             bg_color = "#9900cc"
 
-  # Kustomisasi tampilan grid
         st.markdown(
             f"""
             <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
