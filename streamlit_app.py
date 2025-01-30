@@ -99,7 +99,7 @@ for _ in range(future_steps):
 future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
 future_df = pd.DataFrame({
     'Time': future_times,
-    'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
+    #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
     'Predicted Index': [0,1,2,3,4,5,6,7,8,9,11]
 })
 
