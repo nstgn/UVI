@@ -12,6 +12,36 @@ from streamlit_gsheets import GSheetsConnection
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
+
+# Custom Header
+st.markdown(
+    """
+    <style>
+    .header {
+        background-color: #D6D6F5;
+        padding: 10px;
+        text-align: center;
+        border-radius: 7px;
+    }
+    .header img {
+        width: 60px;
+    }
+    </style>
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Streamlit Title
+st.markdown(
+    """
+    <h1 style="text-align: center;">UV Index</h1>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Menetapkan latest_time ke pukul 08:00
 latest_time = datetime.strptime("08:00", "%H:%M")
 
