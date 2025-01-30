@@ -12,15 +12,6 @@ from streamlit_gsheets import GSheetsConnection
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
-
-st.markdown(
-    """
-    <h1 style="text-align: center;">UV Index Prediction</h1>
-    """,
-    unsafe_allow_html=True,
-)
-
-
 # Menetapkan latest_time ke pukul 08:00
 latest_time = datetime.strptime("08:00", "%H:%M")
 
@@ -28,6 +19,64 @@ future_df = pd.DataFrame({
     "Time": [latest_time + timedelta(minutes=30 * i) for i in range(10)],
     "Predicted Index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 11]
 })
+uv_index = 2
+
+fig = go.Figure(go.Indicator(
+    mode="gauge+number",
+    value=uv_index,
+    gauge={
+        'axis': {'range': [0, 11]},
+        'bar': {'color': "#3098ff"},
+        'steps': [
+            {'range': [0, 3], 'color': "#00ff00"},
+            {'range': [3, 6], 'color': "#ffff00"},
+            {'range': [6, 8], 'color': "#ff6600"},
+            {'range': [8, 10], 'color': "#ff0000"},
+            {'range': [10,11], 'color': "#9900cc"},
+        ]
+    }
+))
+
+fig.update_layout(
+    margin=dict(t=30, b=30, l=30, r=30),
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+# Menambahkan widget himbauan
+st.markdown(
+    f"""
+    <div style="text-align: center;">
+        <span style="display: inline-block; padding: 5px 15px; border-radius: 5px;
+                    background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
+            {"<p style='color: #00ff00;'><strong>✅ Tingkat aman:</strong> Gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
+             "<p style='color: #ffcc00;'><strong>⚠️ Tingkat bahaya sedang:</strong> Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
+             "<p style='color: #ff6600;'><strong>⚠️ Tingkat bahaya tinggi:</strong> Kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
+             "<p style='color: #ff0000;'><strong>⚠️ Tingkat bahaya sangat tinggi:</strong> Tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
+             "<p style='color: #9900cc;'><strong>❗ Tingkat bahaya ekstrem:</strong> Diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
+       </span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Menambahkan widget waktu
+st.markdown(
+    f"""
+    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
+        <p><b>Pukul:</b> {latest_time.strftime('%H:%M')}</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+st.markdown(
+    """
+    <h1 style="text-align: center;">UV Index Prediction</h1>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
