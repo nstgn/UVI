@@ -87,7 +87,7 @@ st.markdown(
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
-        <p><b>Pukul:</b> {08.00('%H:%M')}</p>
+        <p><b>Pukul:</b> {08.00}</p>
     </div>
     """,
     unsafe_allow_html=True,
