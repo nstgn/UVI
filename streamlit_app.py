@@ -102,7 +102,7 @@ future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions
     #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
 future_df = pd.DataFrame({
     "Time": pd.date_range("2025-01-30 08:30", periods=10, freq="30min").strftime('%H:%M'),
-    'Predicted Index': [0,1,2,3,4,5,6,7,8,9,11]
+    'Predicted Index': [0,1,2,3,4,5,6,7,8,11]
 
 })
 
