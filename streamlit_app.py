@@ -1,128 +1,64 @@
-# Custom Header
+import streamlit as st
+import datetime
+import pandas as pd
+import plotly.express as px
+
+# Judul Aplikasi
+st.title("UV Index Monitor")
+
+# Simulasi Data Dummy
+latest_time = datetime.datetime.now()
+uv_index = 5  # Nilai UV Index tetap (bisa diubah sesuai keinginan)
+
+# Simulasi Data Prediksi Dummy
+future_df = pd.DataFrame({
+    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(5)],
+    "Predicted Index": [4, 6, 8, 9, 11]  # Data dummy
+})
+
+# Menampilkan UV Index saat ini
+st.metric(label="Current UV Index", value=uv_index)
+
+# Warna indikator UV berdasarkan level
+def get_uv_color(index):
+    if index <= 2:
+        return "green"
+    elif index <= 5:
+        return "yellow"
+    elif index <= 7:
+        return "orange"
+    elif index <= 10:
+        return "red"
+    else:
+        return "purple"
+
+# Kotak indikator UV
 st.markdown(
-    """
-    <style>
-    .header {
-        background-color: #D6D6F5;
-        padding: 10px;
-        text-align: center;
-        border-radius: 7px;
-    }
-    .header img {
-        width: 60px;
-    }
-    </style>
-    <div class="header">
-        <img src="https://upload.wikimedia.org/wikipedia/id/2/2d/Undip.png" alt="Logo">
+    f"""
+    <div style="padding: 20px; text-align: center; background-color: {get_uv_color(uv_index)}; color: white; font-size: 24px; border-radius: 10px;">
+        UV Index: {uv_index}
     </div>
     """,
     unsafe_allow_html=True
 )
 
-# Streamlit Title
-st.markdown(
-    """
-    <h1 style="text-align: center;">UV Index</h1>
-    """,
-    unsafe_allow_html=True,
-)
+# Grafik Prediksi UV Index
+fig = px.line(future_df, x="Time", y="Predicted Index", markers=True, title="Predicted UV Index")
+st.plotly_chart(fig)
 
-# Membuat gauge chart
-#latest_data = data.iloc[-1] 
-#latest_time = latest_data.name 
-uv_index = 2
-fig = go.Figure(go.Indicator(
-    mode="gauge+number",
-    value=uv_index,
-    gauge={
-        'axis': {'range': [0, 11]},
-        'bar': {'color': "#3098ff"},
-        'steps': [
-            {'range': [0, 3], 'color': "#00ff00"},
-            {'range': [3, 6], 'color': "#ffff00"},
-            {'range': [6, 8], 'color': "#ff6600"},
-            {'range': [8, 10], 'color': "#ff0000"},
-            {'range': [10,11], 'color': "#9900cc"},
-        ]
-    }
-))
+# Catatan Keselamatan Berdasarkan UV Index
+if uv_index <= 2:
+    st.success("UV rendah. Aman untuk aktivitas luar ruangan.")
+elif uv_index <= 5:
+    st.warning("UV sedang. Gunakan topi dan kacamata hitam.")
+elif uv_index <= 7:
+    st.warning("UV tinggi. Pakai sunscreen dan cari tempat teduh.")
+elif uv_index <= 10:
+    st.error("UV sangat tinggi. Hindari terlalu lama di bawah matahari!")
+else:
+    st.error("UV ekstrem! Batasi waktu di luar ruangan sebisa mungkin.")
 
-fig.update_layout(
-    margin=dict(t=30, b=30, l=30, r=30),
-)
-
-st.plotly_chart(fig, use_container_width=True)
-
-# Menambahkan widget himbauan
-st.markdown(
-    f"""
-    <div style="text-align: center;">
-        <span style="display: inline-block; padding: 5px 15px; border-radius: 5px;
-                    background-color: {'#d4edda' if uv_index <= 2 else '#fcfac0' if uv_index <= 5 else '#ffc78f' if uv_index <= 7 else '#ff8a8a' if uv_index <= 10 else '#e7cafc'};">
-            {"<p style='color: #00ff00;'><strong>✅ Tingkat aman:</strong> Gunakan pelembab tabir surya SPF 30+ dan kacamata hitam.</p>" if uv_index <= 2 else
-             "<p style='color: #ffcc00;'><strong>⚠️ Tingkat bahaya sedang:</strong> Oleskan cairan pelembab tabir surya SPF 30+ setiap 2 jam, kenakan pakaian pelindung matahari.</p>" if uv_index <= 5 else
-             "<p style='color: #ff6600;'><strong>⚠️ Tingkat bahaya tinggi:</strong> Kurangi paparan matahari antara pukul 10 pagi hingga pukul 4 sore.</p>" if uv_index <= 7 else
-             "<p style='color: #ff0000;'><strong>⚠️ Tingkat bahaya sangat tinggi:</strong> Tetap di tempat teduh dan oleskan sunscreen setiap 2 jam.</p>" if uv_index <= 10 else
-             "<p style='color: #9900cc;'><strong>❗ Tingkat bahaya ekstrem:</strong> Diperlukan semua tindakan pencegahan karena kulit dan mata dapat rusak dalam hitungan menit.</p>"}
-       </span>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Menambahkan widget waktu
-st.markdown(
-    f"""
-    <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
-        <p><b>Pukul:</b> {08.00}</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    """
-    <h1 style="text-align: center;">UV Index Prediction</h1>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Tampilan grid prakiraan
-cols = st.columns(len(future_df))
-for i, row in future_df.iterrows():
-    with cols[i]:
-        uv_level = row["Predicted Index"]
-        if uv_level < 3:
-            icon = "🟢"
-            desc = "Low"
-            bg_color = "#00ff00"
-        elif uv_level < 6:
-            icon = "🟡"
-            desc = "Moderate"
-            bg_color = "#ffe600"
-        elif uv_level < 8:
-            icon = "🟠"
-            desc = "High"
-            bg_color = "#ff8c00"
-        elif uv_level < 11:
-            icon = "🔴"
-            desc = "Very High"
-            bg_color = "#ff0000"
-        else:
-            icon = "🟣"
-            desc = "Extreme"
-            bg_color = "#9900cc"
-
-        st.markdown(
-            f"""
-            <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
-                <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
-                <h2 style="color:white;">{icon} {uv_level}</h2>
-                <p style="color:white;">{desc}</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+# Jalankan dengan: streamlit run streamlit_app.py
 
 # Menambahkan tabel saran proteksi
 st.markdown(
