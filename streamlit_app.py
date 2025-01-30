@@ -97,23 +97,11 @@ for _ in range(future_steps):
 
 # Inversi normalisasi dan bulatkan prediksi
 future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
-#future_df = pd.DataFrame({
-    #'Time': future_times,
-    #'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
+future_df = pd.DataFrame({
+    'Time': future_times,
+    'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
+})
 
-
-# Buat data prediksi manual dengan jumlah yang sama
-times = pd.date_range("2025-01-30 08:30", periods=10, freq="30min").strftime('%H:%M').tolist()
-uv_predictions = [0,1,2,3,4,5,6,7,8,11]  # Harus sama panjang dengan times
-
-# Pastikan panjangnya sama
-assert len(times) == len(uv_predictions), "Jumlah waktu dan prediksi UV Index harus sama!"
-
-# Buat DataFrame
-future_df = pd.DataFrame({"Time": times, "Predicted Index": uv_predictions}
-
-
-                         
 # Custom Header
 st.markdown(
     """
@@ -209,7 +197,8 @@ st.markdown(
 cols = st.columns(len(future_df))
 for i, row in future_df.iterrows():
     with cols[i]:
-        uv_level = row["Predicted Index"]
+        #uv_level = row["Predicted Index"]
+        uv_level = row["0,1,2,3,4,5,6,7,9,11"]
         if uv_level < 3:
             icon = "🟢"
             desc = "Low"
