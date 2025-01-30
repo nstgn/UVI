@@ -79,24 +79,55 @@ st.markdown(
 # Simulasi Data Prediksi Dummy
 future_df = pd.DataFrame({
     "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(5)],
-    "Predicted Index": [4, 6, 8, 9, 11]  # Data dummy
+    "Predicted Index": [4, 6, 8, 9, 11]  
 })
 
 # Menampilkan UV Index saat ini
 st.metric(label="Current UV Index", value=uv_index)
 
-# Warna indikator UV berdasarkan level
-def get_uv_color(index):
-    if index <= 2:
-        return "green"
-    elif index <= 5:
-        return "yellow"
-    elif index <= 7:
-        return "orange"
-    elif index <= 10:
-        return "red"
-    else:
-        return "purple"
+st.markdown(
+    """
+    <h1 style="text-align: center;">UV Index Prediction</h1>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Tampilan grid prakiraan
+cols = st.columns(len(future_df))
+for i, row in future_df.iterrows():
+    with cols[i]:
+        uv_level = row["Predicted Index"]
+        if uv_level < 3:
+            icon = "🟢"
+            desc = "Low"
+            bg_color = "#00ff00"
+        elif uv_level < 6:
+            icon = "🟡"
+            desc = "Moderate"
+            bg_color = "#ffe600"
+        elif uv_level < 8:
+            icon = "🟠"
+            desc = "High"
+            bg_color = "#ff8c00"
+        elif uv_level < 11:
+            icon = "🔴"
+            desc = "Very High"
+            bg_color = "#ff0000"
+        else:
+            icon = "🟣"
+            desc = "Extreme"
+            bg_color = "#9900cc"
+
+        st.markdown(
+            f"""
+            <div style="text-align:center; padding:10px; border-radius:5px; background-color:{bg_color};">
+                <h3 style="color:white;">{row['Time'].strftime('%H:%M')}</h3>
+                <h2 style="color:white;">{icon} {uv_level}</h2>
+                <p style="color:white;">{desc}</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 # Kotak indikator UV
 st.markdown(
