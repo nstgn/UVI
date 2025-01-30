@@ -42,7 +42,7 @@ st.markdown(
 
 # Membuat gauge chart
 latest_time = 08.00
-uv_index = 5 
+uv_index = 2 
 
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
@@ -87,7 +87,7 @@ st.markdown(
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
-        <p><b>Pukul:</b> {latest_time.strftime('%H:%M')}</p>
+        <p><b>Pukul:</b> {08.00}</p>
     </div>
     """,
     unsafe_allow_html=True,
