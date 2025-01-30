@@ -87,7 +87,7 @@ st.markdown(
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
-        <p><b>Pukul:</b> {08.00}</p>
+        <p><b>Pukul:</b> {08.00('%H:%M')}</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -99,6 +99,11 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+future_df = pd.DataFrame({
+    "Time": [latest_time + pd.Timedelta(minutes=30 * i) for i in range(5)],
+    "Predicted Index": [4, 6, 8, 9, 11]  # Data dummy
+})
 
 # Tampilan grid prakiraan
 cols = st.columns(len(future_df))
