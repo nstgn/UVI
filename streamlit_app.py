@@ -11,20 +11,17 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import plotly.graph_objects as go
 
+#2 Input Data
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
-
-#data = conn.read(worksheet="Sheet1")
 data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
 
 #3 Pre-Processing Data
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
 data.set_index('Datetime', inplace=True)
 data = data[['Index']].copy()
-
 date_range = pd.date_range(start=data.index.min(), end=data.index.max(), freq='2T')
 date_range = date_range[(date_range.hour >= 6) & (date_range.hour <= 18)]
-
 data = data.reindex(date_range)
 data['Index'].interpolate(method='linear', inplace=True)
 
@@ -39,7 +36,6 @@ def prepare_data(series, n_steps):
         X.append(series[i:i+n_steps])
         y.append(series[i+n_steps])
     return np.array(X), np.array(y)
-
 n_steps = 7
 X, y = prepare_data(data['Index_scaled'].values, n_steps)
 
@@ -70,7 +66,7 @@ history=model.fit(X_train, y_train, epochs=100, batch_size=16, validation_data=(
 train_predicted = model.predict(X_train)
 test_predicted = model.predict(X_test)
 
-# Atur waktu prediksi
+#11 Atur waktu prediksi
 last_time = data.index[-1]
 last_time = last_time.replace(second=0, microsecond=0)
 minute_offset = last_time.minute % 30
@@ -81,25 +77,23 @@ else:
 
 time_interval = pd.Timedelta(minutes=30)
 
-# Prediksi ke depan
+#13 Prediksi ke depan
 future_steps = 10
 last_sequence = X_test[-1]  
 future_predictions = []
 future_times = [last_time + i * time_interval for i in range(1, future_steps + 1)]
-
-# Loop untuk prediksi
 for _ in range(future_steps):
     prediction = model.predict(last_sequence.reshape(1, n_steps, 1))[0, 0]
     future_predictions.append(prediction)
     last_sequence = np.append(last_sequence[1:], prediction)
 
-# Inversi normalisasi dan bulatkan prediksi
 future_predictions_scaled = scaler.inverse_transform(np.array(future_predictions).reshape(-1, 1))
 future_df = pd.DataFrame({
     'Time': future_times,
     'Predicted Index': np.floor(future_predictions_scaled.flatten()).astype(int)
 })
 
+#14 Tampilan
 # Custom Header
 st.markdown(
     """
@@ -121,7 +115,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Streamlit Title
 st.markdown(
     """
     <h1 style="text-align: center;">UV Index</h1>
@@ -155,8 +148,6 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
-# Menambahkan widget himbauan
 st.markdown(
     f"""
     <div style="text-align: center;">
@@ -173,7 +164,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Menambahkan widget waktu
 st.markdown(
     f"""
     <div style="text-align: center; font-size: medium; margin-top: 10px; margin-bottom: 40px;">
