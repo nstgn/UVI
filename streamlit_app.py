@@ -99,10 +99,7 @@ st.markdown(
     """
     <style>
     .header {
-        background-color: #D6D6F5;
-        padding: 10px;
-        text-align: center;
-        border-radius: 7px;
+        background-color: #D6D6F5; padding: 10px; text-align: center; border-radius: 7px;
     }
     .header img {
         width: 60px;
