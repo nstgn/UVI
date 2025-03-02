@@ -123,7 +123,7 @@ st.markdown(
 latest_data = data.iloc[-1] 
 latest_time = latest_data.name 
 #uv_index = latest_data['Index'] 
-uv_index = latest_data['0'] 
+uv_index = 0 
 
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
