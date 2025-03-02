@@ -120,9 +120,12 @@ st.markdown(
 )
 
 # Membuat gauge chart
-latest_data = data.iloc[-1] 
-latest_time = latest_data.name 
-uv_index = latest_data['Index'] 
+#latest_data = data.iloc[-1] 
+#latest_time = latest_data.name 
+#uv_index = latest_data['Index'] 
+
+latest_data = data.dropna().iloc[-1]  # Ambil nilai terakhir yang tidak NaN
+uv_index = latest_data['Index']
 
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
