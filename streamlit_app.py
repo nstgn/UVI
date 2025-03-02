@@ -12,10 +12,17 @@ from streamlit_gsheets import GSheetsConnection
 import plotly.graph_objects as go
 
 #2 Input Data
-st.cache_data.cleare()
+st.cache_data.clear()
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
-data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3], ttl=0)
+#data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3], ttl=0)
+
+# Baca data dari Google Sheets
+@st.cache_data(ttl=600)  # Cache selama 10 menit
+def load_data():
+    return pd.read_csv(url, usecols=[0, 1, 2, 3])
+
+data = load_data()
 
 #3 Pre-Processing Data
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
