@@ -26,8 +26,12 @@ data = data.reindex(date_range)
 data['Index'].interpolate(method='linear', inplace=True)
 
 #4 Normalisasi Data
+#scaler = MinMaxScaler(feature_range=(0, 1))
+#data ['Index_scaled'] = scaler.fit_transform(data[['Index']])
+
 scaler = MinMaxScaler(feature_range=(0, 1))
-data ['Index_scaled'] = scaler.fit_transform(data[['Index']])
+scaler.fit(data[['Index']].replace(0, np.nan).dropna())  # Abaikan nol saat fitting scaler
+
 
 #5 Inisialisasi Timestep
 def prepare_data(series, n_steps):
