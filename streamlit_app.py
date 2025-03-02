@@ -15,7 +15,7 @@ import plotly.graph_objects as go
 url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
 #url ="https://docs.google.com/spreadsheets/d/1XPGPw08xkov3ly_BgamdInZUcSONPGbDSm0pOJ2ZJbw/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
-data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
+data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3], ttl=0)
 
 #3 Pre-Processing Data
 data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
