@@ -120,6 +120,7 @@ st.markdown(
 )
 
 # Membuat gauge chart
+data = load_data() 
 latest_data = data.iloc[-1] 
 latest_time = latest_data.name 
 uv_index = latest_data['Index'] 
