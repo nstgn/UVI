@@ -120,17 +120,13 @@ st.markdown(
 )
 
 # Membuat gauge chart
-#latest_data = data.iloc[-1] 
-#latest_time = latest_data.name 
-#uv_index = latest_data['Index'] 
-
-last_row = data[-1]  # Ambil baris terakhir
-index_value = last_row[3] 
+latest_data = data.iloc[-1] 
+latest_time = latest_data.name 
+uv_index = latest_data['Index'] 
 
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
-    #value=uv_index,
-    value=index_value,
+    value=uv_index,
     gauge={
         'axis': {'range': [0, 11]},
         'bar': {'color': "#3098ff"},
