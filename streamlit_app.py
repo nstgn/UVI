@@ -120,9 +120,14 @@ st.markdown(
 )
 
 # Membuat gauge chart
-latest_data = data.iloc[-1] 
-latest_time = latest_data.name 
-uv_index = latest_data['Index'] 
+#latest_data = data.iloc[-1] 
+#latest_time = latest_data.name 
+#uv_index = latest_data['Index'] 
+latest_data = data.iloc[-1]
+latest_time = latest_data.name
+uv_index = latest_data['Index']
+st.write("### Data Terakhir yang Diproses")
+st.write(data.tail(1))
 
 fig = go.Figure(go.Indicator(
     mode="gauge+number",
