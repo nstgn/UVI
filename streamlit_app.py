@@ -12,7 +12,8 @@ from streamlit_gsheets import GSheetsConnection
 import plotly.graph_objects as go
 
 #2 Input Data
-url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
+#url = "https://docs.google.com/spreadsheets/d/1SczaIV1JHUSca1hPilByJFFzOi5a8Hkhi0OemlmPQsY/edit?usp=sharing"
+url ="https://docs.google.com/spreadsheets/d/1XPGPw08xkov3ly_BgamdInZUcSONPGbDSm0pOJ2ZJbw/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 data = conn.read(spreadsheet=url, usecols=[0, 1, 2, 3])
 
