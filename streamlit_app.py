@@ -21,6 +21,15 @@ data['Datetime'] = pd.to_datetime(data['Date'] + ' ' + data['Time'])
 data.set_index('Datetime', inplace=True)
 data = data[['Index']].copy()
 
+data = data.between_time('06:00', '18:05')
+last_real_value = data.iloc[-1]['Index']
+last_real_time = data.index[-1]
+date_range = pd.date_range(start=data.index.min(), end=data.index.max(), freq='2T')
+data = data.reindex(date_range)
+data['Index'].interpolate(method='linear', inplace=True)
+data.loc[last_real_time, 'Index'] = last_real_value
+
+
 #4 Normalisasi Data
 scaler = MinMaxScaler(feature_range=(0, 1))
 data ['Index_scaled'] = scaler.fit_transform(data[['Index']])
